@@ -1,0 +1,139 @@
+{% comment %}
+Section: Art of Rest Slider
+{% endcomment %}
+
+<section class="art-of-rest-section">
+  <div class="art-of-rest-container" style="max-width: {{ section.settings.max_width }}px; text-align: {{ section.settings.text_alignment }};">
+    {% if section.settings.title != blank %}
+      <h3>{{ section.settings.title }}</h3>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p>{{ section.settings.description }}</p>
+    {% endif %}
+
+    <div class="swiper art-of-rest-swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.image.alt | escape }}">
+            {% endif %}
+            {% if block.settings.link_label != blank and block.settings.link_url != blank %}
+              <a href="{{ block.settings.link_url }}" class="slide-link">
+                {{ block.settings.link_label }} &gt;
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.art-of-rest-section {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+}
+.art-of-rest-container h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.art-of-rest-container p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.art-of-rest-swiper {
+  width: 100%;
+}
+.art-of-rest-swiper .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.art-of-rest-swiper img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.slide-link {
+  margin-top: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+}
+@media (max-width: 768px) {
+  .art-of-rest-container h3 { font-size: 20px; }
+  .art-of-rest-container p { font-size: 14px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof Swiper !== 'undefined') {
+    new Swiper('.art-of-rest-swiper', {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        320: { slidesPerView: 1.2, spaceBetween: 10 },
+        768: { slidesPerView: 2, spaceBetween: 20 }
+      }
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Art of Rest Slider",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "The Art of Rest, Layered to Perfection" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Cloud-soft pillows and breathable quilts—crafted for comfort, designed to elevate every layer of your bed." },
+    { "type": "select", "id": "text_alignment", "label": "Text Alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+    { "type": "range", "id": "max_width", "label": "Max Width (px)", "min": 800, "max": 1600, "step": 50, "default": 1200 },
+    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 120, "step": 5, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 120, "step": 5, "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "link_label", "label": "Link Label", "default": "Shop Pillows" },
+        { "type": "url", "id": "link_url", "label": "Link URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Art of Rest Slider",
+      "category": "Custom",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
