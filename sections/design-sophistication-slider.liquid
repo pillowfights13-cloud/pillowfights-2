@@ -461,463 +461,842 @@ if (window.Shopify && window.Shopify.designMode) {
 </script>
 
 {% schema %}
-{
-  "name": "Design Sophistication Slider",
-  "tag": "section",
-  "class": "section",
-  "settings": [
     {
-      "type": "header",
-      "content": "🎛️ Layout Settings"
-    },
-    {
-      "type": "range",
-      "id": "container_width",
-      "label": "Container Max Width (px)",
-      "min": 1000,
-      "max": 1600,
-      "step": 50,
-      "default": 1200
-    },
-    {
-      "type": "range",
-      "id": "text_width",
-      "label": "Text Content Width (%)",
-      "min": 30,
-      "max": 60,
-      "step": 5,
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "content_gap",
-      "label": "Content Gap (px)",
-      "min": 20,
-      "max": 100,
-      "step": 10,
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "section_padding_top",
-      "label": "Section Padding Top (px)",
-      "min": 0,
-      "max": 120,
-      "step": 10,
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "section_padding_bottom",
-      "label": "Section Padding Bottom (px)",
-      "min": 0,
-      "max": 120,
-      "step": 10,
-      "default": 80
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "📝 Text Content"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Design That Speaks Sophistication."
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Comfort That Feels Like Home."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "In every space, contrast creates harmony—coarse weaves, graceful lines, and light that whispers through the room."
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL"
-    },
-    {
-      "type": "header",
-      "content": "🎨 Title Styling"
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "label": "Title Font Size (px)",
-      "min": 24,
-      "max": 60,
-      "step": 2,
-      "default": 36
-    },
-    {
-      "type": "select",
-      "id": "title_weight",
-      "label": "Title Font Weight",
-      "options": [
-        {"value": "300", "label": "Light"},
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"},
-        {"value": "700", "label": "Bold"}
+      "name": "Design Sophistication Slider",
+      "tag": "section",
+      "class": "section",
+      "settings": [
+        {
+          "type": "header",
+          "content": "🎛️ Layout Settings"
+        },
+        {
+          "type": "range",
+          "id": "container_width",
+          "label": "Container Max Width (px)",
+          "min": 1000,
+          "max": 1600,
+          "step": 50,
+          "default": 1200
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Text Content Width (%)",
+          "min": 30,
+          "max": 60,
+          "step": 5,
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "content_gap",
+          "label": "Content Gap (px)",
+          "min": 20,
+          "max": 100,
+          "step": 10,
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "section_padding_top",
+          "label": "Section Padding Top (px)",
+          "min": 0,
+          "max": 120,
+          "step": 10,
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "section_padding_bottom",
+          "label": "Section Padding Bottom (px)",
+          "min": 0,
+          "max": 120,
+          "step": 10,
+          "default": 80
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "📝 Text Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Design That Speaks Sophistication."
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Comfort That Feels Like Home."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "In every space, contrast creates harmony—coarse weaves, graceful lines, and light that whispers through the room."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "header",
+          "content": "🎨 Title Styling"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Title Font Size (px)",
+          "min": 24,
+          "max": 60,
+          "step": 2,
+          "default": 36
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Title Font Weight",
+          "options": [
+            {"value": "300", "label": "Light"},
+            {"value": "400", "label": "Normal"},
+            {"value": "500", "label": "Medium"},
+            {"value": "600", "label": "Semi Bold"},
+            {"value": "700", "label": "Bold"}
+          ],
+          "default": "600"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "title_uppercase",
+          "label": "Title Uppercase",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "title_spacing",
+          "label": "Title Bottom Spacing (px)",
+          "min": 10,
+          "max": 40,
+          "step": 2,
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "📄 Subtitle & Description"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Subtitle Font Size (px)",
+          "min": 16,
+          "max": 32,
+          "step": 2,
+          "default": 24
+        },
+        {
+          "type": "select",
+          "id": "subtitle_weight",
+          "label": "Subtitle Font Weight",
+          "options": [
+            {"value": "300", "label": "Light"},
+            {"value": "400", "label": "Normal"},
+            {"value": "500", "label": "Medium"},
+            {"value": "600", "label": "Semi Bold"}
+          ],
+          "default": "400"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Subtitle Color",
+          "default": "#333333"
+        },
+        {
+          "type": "range",
+          "id": "subtitle_spacing",
+          "label": "Subtitle Bottom Spacing (px)",
+          "min": 10,
+          "max": 30,
+          "step": 2,
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "description_size",
+          "label": "Description Font Size (px)",
+          "min": 14,
+          "max": 20,
+          "step": 1,
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "description_line_height",
+          "label": "Description Line Height",
+          "min": 1.3,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 1.6
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "Description Color",
+          "default": "#666666"
+        },
+        {
+          "type": "range",
+          "id": "description_spacing",
+          "label": "Description Bottom Spacing (px)",
+          "min": 20,
+          "max": 50,
+          "step": 5,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "🔘 Button Styling"
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Button Font Size (px)",
+          "min": 12,
+          "max": 18,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "button_font_weight",
+          "label": "Button Font Weight",
+          "options": [
+            {"value": "400", "label": "Normal"},
+            {"value": "500", "label": "Medium"},
+            {"value": "600", "label": "Semi Bold"},
+            {"value": "700", "label": "Bold"}
+          ],
+          "default": "500"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_uppercase",
+          "label": "Button Uppercase",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "button_padding_v",
+          "label": "Button Vertical Padding (px)",
+          "min": 8,
+          "max": 20,
+          "step": 2,
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "button_padding_h",
+          "label": "Button Horizontal Padding (px)",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_border_radius",
+          "label": "Button Border Radius (px)",
+          "min": 0,
+          "max": 30,
+          "step": 2,
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "button_border_width",
+          "label": "Button Border Width (px)",
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button Background",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Button Border Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_background",
+          "label": "Button Hover Background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_text_color",
+          "label": "Button Hover Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_border_color",
+          "label": "Button Hover Border Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "🛍️ Product Card Styling"
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "label": "Product Image Height (px)",
+          "min": 200,
+          "max": 400,
+          "step": 20,
+          "default": 300
+        },
+        {
+          "type": "color",
+          "id": "image_background",
+          "label": "Image Background Color",
+          "default": "#f8f8f8"
+        },
+        {
+          "type": "range",
+          "id": "image_hover_scale",
+          "label": "Image Hover Scale (%)",
+          "min": 100,
+          "max": 120,
+          "step": 5,
+          "default": 105
+        },
+        {
+          "type": "range",
+          "id": "card_padding",
+          "label": "Card Content Padding (px)",
+          "min": 10,
+          "max": 30,
+          "step": 2,
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "card_border_radius",
+          "label": "Card Border Radius (px)",
+          "min": 0,
+          "max": 20,
+          "step": 2,
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "card_border_width",
+          "label": "Card Border Width (px)",
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "card_background",
+          "label": "Card Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "card_border_color",
+          "label": "Card Border Color",
+          "default": "#e0e0e0"
+        },
+        {
+          "type": "checkbox",
+          "id": "card_shadow",
+          "label": "Card Shadow",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "card_hover_shadow",
+          "label": "Card Hover Shadow",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "card_hover_lift",
+          "label": "Card Hover Lift (px)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "header",
+          "content": "📊 Product Info Styling"
+        },
+        {
+          "type": "range",
+          "id": "product_title_size",
+          "label": "Product Title Size (px)",
+          "min": 14,
+          "max": 20,
+          "step": 1,
+          "default": 16
+        },
+        {
+          "type": "select",
+          "id": "product_title_weight",
+          "label": "Product Title Weight",
+          "options": [
+            {"value": "400", "label": "Normal"},
+            {"value": "500", "label": "Medium"},
+            {"value": "600", "label": "Semi Bold"}
+          ],
+          "default": "500"
+        },
+        {
+          "type": "color",
+          "id": "product_title_color",
+          "label": "Product Title Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "title_margin",
+          "label": "Title Bottom Margin (px)",
+          "min": 5,
+          "max": 15,
+          "step": 1,
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "current_price_size",
+          "label": "Current Price Size (px)",
+          "min": 12,
+          "max": 18,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "select",
+          "id": "current_price_weight",
+          "label": "Current Price Weight",
+          "options": [
+            {"value": "400", "label": "Normal"},
+            {"value": "500", "label": "Medium"},
+            {"value": "600", "label": "Semi Bold"}
+          ],
+          "default": "500"
+        },
+        {
+          "type": "color",
+          "id": "current_price_color",
+          "label": "Current Price Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "compare_price_size",
+          "label": "Compare Price Size (px)",
+          "min": 10,
+          "max": 16,
+          "step": 1,
+          "default": 12
+        },
+        {
+          "type": "color",
+          "id": "compare_price_color",
+          "label": "Compare Price Color",
+          "default": "#999999"
+        },
+        {
+          "type": "range",
+          "id": "price_margin",
+          "label": "Price Bottom Margin (px)",
+          "min": 5,
+          "max": 15,
+          "step": 1,
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "star_size",
+          "label": "Star Rating Size (px)",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "label": "Star Color",
+          "default": "#ffd700"
+        },
+        {
+          "type": "color",
+          "id": "star_empty_color",
+          "label": "Empty Star Color",
+          "default": "#e0e0e0"
+        },
+        {
+          "type": "header",
+          "content": "🎠 Slider Settings"
+        },
+        {
+          "type": "range",
+          "id": "slides_desktop",
+          "label": "Slides per View (Desktop)",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "slides_tablet",
+          "label": "Slides per View (Tablet)",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "range",
+          "id": "slides_mobile",
+          "label": "Slides per View (Mobile)",
+          "min": 1,
+          "max": 2,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "slide_spacing",
+          "label": "Slide Spacing (px)",
+          "min": 10,
+          "max": 40,
+          "step": 5,
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "mobile_slide_spacing",
+          "label": "Mobile Slide Spacing (px)",
+          "min": 10,
+          "max": 30,
+          "step": 5,
+          "default": 15
+        },
+        {
+          "type": "checkbox",
+          "id": "infinite_loop",
+          "label": "Infinite Loop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Enable Autoplay",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "autoplay_delay",
+          "label": "Autoplay Delay (seconds)",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_interaction",
+          "label": "Pause on Interaction",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "transition_speed",
+          "label": "Transition Speed (ms)",
+          "min": 200,
+          "max": 1000,
+          "step": 100,
+          "default": 500
+        },
+        {
+          "type": "select",
+          "id": "transition_effect",
+          "label": "Transition Effect",
+          "options": [
+            {"value": "slide", "label": "Slide"},
+            {"value": "fade", "label": "Fade"},
+            {"value": "cube", "label": "Cube"},
+            {"value": "coverflow", "label": "Coverflow"}
+          ],
+          "default": "slide"
+        },
+        {
+          "type": "header",
+          "content": "🏹 Navigation Arrows"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrows",
+          "label": "Show Navigation Arrows",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "arrow_size",
+          "label": "Arrow Size (px)",
+          "min": 30,
+          "max": 60,
+          "step": 5,
+          "default": 44
+        },
+        {
+          "type": "range",
+          "id": "arrow_icon_size",
+          "label": "Arrow Icon Size (px)",
+          "min": 12,
+          "max": 24,
+          "step": 2,
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "arrow_border_width",
+          "label": "Arrow Border Width (px)",
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "arrow_background",
+          "label": "Arrow Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "arrow_color",
+          "label": "Arrow Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "arrow_border_color",
+          "label": "Arrow Border Color",
+          "default": "#e0e0e0"
+        },
+        {
+          "type": "color",
+          "id": "arrow_hover_background",
+          "label": "Arrow Hover Background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "arrow_hover_color",
+          "label": "Arrow Hover Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "arrow_hover_border_color",
+          "label": "Arrow Hover Border Color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "arrow_shadow",
+          "label": "Arrow Shadow",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "📱 Mobile Settings"
+        },
+        {
+          "type": "range",
+          "id": "mobile_breakpoint",
+          "label": "Mobile Breakpoint (px)",
+          "min": 600,
+          "max": 1000,
+          "step": 50,
+          "default": 768
+        },
+        {
+          "type": "range",
+          "id": "mobile_gap",
+          "label": "Mobile Content Gap (px)",
+          "min": 20,
+          "max": 60,
+          "step": 10,
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding",
+          "label": "Mobile Container Padding (px)",
+          "min": 15,
+          "max": 30,
+          "step": 5,
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "mobile_text_align",
+          "label": "Mobile Text Alignment",
+          "options": [
+            {"value": "left", "label": "Left"},
+            {"value": "center", "label": "Center"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_order",
+          "label": "Mobile Text Order",
+          "min": 1,
+          "max": 2,
+          "step": 1,
+          "default": 1,
+          "info": "1 = Text first, 2 = Text second"
+        },
+        {
+          "type": "range",
+          "id": "mobile_slider_order",
+          "label": "Mobile Slider Order",
+          "min": 1,
+          "max": 2,
+          "step": 1,
+          "default": 2,
+          "info": "1 = Slider first, 2 = Slider second"
+        },
+        {
+          "type": "range",
+          "id": "mobile_title_size",
+          "label": "Mobile Title Size (px)",
+          "min": 20,
+          "max": 40,
+          "step": 2,
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "mobile_subtitle_size",
+          "label": "Mobile Subtitle Size (px)",
+          "min": 16,
+          "max": 24,
+          "step": 1,
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "mobile_description_size",
+          "label": "Mobile Description Size (px)",
+          "min": 14,
+          "max": 18,
+          "step": 1,
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "mobile_image_height",
+          "label": "Mobile Image Height (px)",
+          "min": 200,
+          "max": 300,
+          "step": 20,
+          "default": 250
+        }
       ],
-      "default": "600"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#000000"
-    },
-    {
-      "type": "checkbox",
-      "id": "title_uppercase",
-      "label": "Title Uppercase",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "title_spacing",
-      "label": "Title Bottom Spacing (px)",
-      "min": 10,
-      "max": 40,
-      "step": 2,
-      "default": 16
-    },
-    {
-      "type": "header",
-      "content": "📄 Subtitle & Description"
-    },
-    {
-      "type": "range",
-      "id": "subtitle_size",
-      "label": "Subtitle Font Size (px)",
-      "min": 16,
-      "max": 32,
-      "step": 2,
-      "default": 24
-    },
-    {
-      "type": "select",
-      "id": "subtitle_weight",
-      "label": "Subtitle Font Weight",
-      "options": [
-        {"value": "300", "label": "Light"},
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"}
+      "blocks": [
+        {
+          "type": "product",
+          "name": "Product",
+          "settings": [
+            {
+              "type": "product",
+              "id": "product",
+              "label": "Select Product"
+            },
+            {
+              "type": "range",
+              "id": "rating",
+              "label": "Star Rating (1-5)",
+              "min": 1,
+              "max": 5,
+              "step": 1,
+              "default": 4,
+              "info": "Manual star rating display"
+            }
+          ]
+        }
       ],
-      "default": "400"
-    },
-    {
-      "type": "color",
-      "id": "subtitle_color",
-      "label": "Subtitle Color",
-      "default": "#333333"
-    },
-    {
-      "type": "range",
-      "id": "subtitle_spacing",
-      "label": "Subtitle Bottom Spacing (px)",
-      "min": 10,
-      "max": 30,
-      "step": 2,
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "description_size",
-      "label": "Description Font Size (px)",
-      "min": 14,
-      "max": 20,
-      "step": 1,
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "description_line_height",
-      "label": "Description Line Height",
-      "min": 1.3,
-      "max": 2.0,
-      "step": 0.1,
-      "default": 1.6
-    },
-    {
-      "type": "color",
-      "id": "description_color",
-      "label": "Description Color",
-      "default": "#666666"
-    },
-    {
-      "type": "range",
-      "id": "description_spacing",
-      "label": "Description Bottom Spacing (px)",
-      "min": 20,
-      "max": 50,
-      "step": 5,
-      "default": 30
-    },
-    {
-      "type": "header",
-      "content": "🔘 Button Styling"
-    },
-    {
-      "type": "range",
-      "id": "button_font_size",
-      "label": "Button Font Size (px)",
-      "min": 12,
-      "max": 18,
-      "step": 1,
-      "default": 14
-    },
-    {
-      "type": "select",
-      "id": "button_font_weight",
-      "label": "Button Font Weight",
-      "options": [
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"},
-        {"value": "700", "label": "Bold"}
-      ],
-      "default": "500"
-    },
-    {
-      "type": "checkbox",
-      "id": "button_uppercase",
-      "label": "Button Uppercase",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "button_padding_v",
-      "label": "Button Vertical Padding (px)",
-      "min": 8,
-      "max": 20,
-      "step": 2,
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_padding_h",
-      "label": "Button Horizontal Padding (px)",
-      "min": 16,
-      "max": 40,
-      "step": 2,
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "button_border_radius",
-      "label": "Button Border Radius (px)",
-      "min": 0,
-      "max": 30,
-      "step": 2,
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "button_border_width",
-      "label": "Button Border Width (px)",
-      "min": 0,
-      "max": 3,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "color",
-      "id": "button_background",
-      "label": "Button Background",
-      "default": "transparent"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_border_color",
-      "label": "Button Border Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_background",
-      "label": "Button Hover Background",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_text_color",
-      "label": "Button Hover Text Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_border_color",
-      "label": "Button Hover Border Color",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "🛍️ Product Card Styling"
-    },
-    {
-      "type": "range",
-      "id": "image_height",
-      "label": "Product Image Height (px)",
-      "min": 200,
-      "max": 400,
-      "step": 20,
-      "default": 300
-    },
-    {
-      "type": "color",
-      "id": "image_background",
-      "label": "Image Background Color",
-      "default": "#f8f8f8"
-    },
-    {
-      "type": "range",
-      "id": "image_hover_scale",
-      "label": "Image Hover Scale (%)",
-      "min": 100,
-      "max": 120,
-      "step": 5,
-      "default": 105
-    },
-    {
-      "type": "range",
-      "id": "card_padding",
-      "label": "Card Content Padding (px)",
-      "min": 10,
-      "max": 30,
-      "step": 2,
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "label": "Card Border Radius (px)",
-      "min": 0,
-      "max": 20,
-      "step": 2,
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "card_border_width",
-      "label": "Card Border Width (px)",
-      "min": 0,
-      "max": 3,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "color",
-      "id": "card_background",
-      "label": "Card Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card Border Color",
-      "default": "#e0e0e0"
-    },
-    {
-      "type": "checkbox",
-      "id": "card_shadow",
-      "label": "Card Shadow",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "card_hover_shadow",
-      "label": "Card Hover Shadow",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "card_hover_lift",
-      "label": "Card Hover Lift (px)",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "default": 4
-    },
-    {
-      "type": "header",
-      "content": "📊 Product Info Styling"
-    },
-    {
-      "type": "range",
-      "id": "product_title_size",
-      "label": "Product Title Size (px)",
-      "min": 14,
-      "max": 20,
-      "step": 1,
-      "default": 16
-    },
-    {
-      "type": "select",
-      "id": "product_title_weight",
-      "label": "Product Title Weight",
-      "options": [
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi Bold"}
-      ],
-      "default": "500"
-    },
-    {
-      "type": "color",
-      "id": "product_title_color",
-      "label": "Product Title Color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "title_margin",
-      "label": "Title Bottom Margin (px)",
-      "min": 5,
-      "max": 15,
-      "step": 1,
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "current_price_size",
-      "label": "Current Price Size (px)",
-      "min": 12,
-      "max": 18,
-      "step": 1,
-      "default": 14
-    },
-    {
-      "type": "select",
-      "id": "current_price_weight",
-      "label": "Current Price Weight",
-      "options": [
-        {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
-        {"value": "600", "label": "Semi
+      "presets": [
+        {
+          "name": "Design Sophistication Slider",
+          "blocks": [
+            {
+              "type": "product"
+            },
+            {
+              "type": "product"
+            },
+            {
+              "type": "product"
+            },
+            {
+              "type": "product"
+            }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
