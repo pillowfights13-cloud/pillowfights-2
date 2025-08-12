@@ -62,6 +62,10 @@
     <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
 
+    <!-- Link the css cdn for the swiper css -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- End the link here -->
+
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
@@ -113,5 +117,10 @@
         {%- sections 'footer-group' -%}
       {%- endif -%}
     </main>
+
+        <!-- Swiper js script -->
+        <script defer src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <!-- end swiper js -->
+
   </body>
 </html>
