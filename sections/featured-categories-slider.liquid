@@ -1,20 +1,31 @@
 {% comment %}
-  Featured Categories Slider Section
+  Featured Categories Slider Section with Flickity
   Add this file to sections/featured-categories-slider.liquid
 {% endcomment %}
+
+<!-- Load Flickity CSS and JS from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 <style>
   .featured-categories-section {
     padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
-    overflow: hidden;
+    {% if section.settings.full_width %}
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    {% endif %}
   }
 
   .featured-categories-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
+    {% unless section.settings.full_width %}
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    {% else %}
+      width: 100%;
+      padding: 0 {{ section.settings.container_padding }}px;
+    {% endunless %}
   }
 
   .section-title {
@@ -24,44 +35,67 @@
     color: {{ section.settings.title_color }};
     font-weight: 600;
     letter-spacing: 1px;
+    {% if section.settings.full_width %}
+      padding: 0 20px;
+    {% endif %}
   }
 
-  .categories-slider {
-    position: relative;
+  /* Flickity Slider Styles */
+  .categories-flickity {
+    background: transparent;
+  }
+
+  .categories-flickity:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .categories-flickity .flickity-viewport {
     overflow: hidden;
+    position: relative;
   }
 
-  .categories-track {
-    display: flex;
-    transition: transform {{ section.settings.animation_duration }}ms ease-in-out;
-    gap: 20px;
+  .categories-flickity .flickity-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
-  .category-item {
-    flex: 0 0 auto;
+  /* Category Item Styles */
+  .category-cell {
+    width: {{ 100 | divided_by: section.settings.items_desktop }}%;
+    padding: 0 10px;
     text-align: center;
     opacity: 0.8;
     transition: all 0.3s ease;
-    cursor: pointer;
   }
 
-  .category-item:hover {
+  .category-cell:hover {
     opacity: 1;
     transform: translateY(-5px);
   }
 
+  .category-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
   .category-image {
     width: 100%;
+    max-width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
+    margin: 0 auto 15px;
+    display: block;
     border: 3px solid transparent;
     transition: all 0.3s ease;
     background: #f8f8f8;
   }
 
-  .category-item:hover .category-image {
+  .category-cell:hover .category-image {
     border-color: {{ section.settings.hover_border_color }};
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   }
@@ -74,82 +108,146 @@
     line-height: 1.4;
   }
 
-  .slider-nav {
+  /* Custom Flickity Navigation */
+  .flickity-button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: {{ section.settings.arrow_background }};
-    color: {{ section.settings.arrow_color }};
     border: none;
+    color: {{ section.settings.arrow_color }};
+    cursor: pointer;
+    border-radius: 50%;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    transition: all 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 10;
-    opacity: 0.8;
+    transition: all 0.3s ease;
+    opacity: {{ section.settings.arrow_opacity | divided_by: 100.0 }};
   }
 
-  .slider-nav:hover {
+  .flickity-button:hover {
     opacity: 1;
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    background: {{ section.settings.arrow_background }};
   }
 
-  .slider-nav.prev {
-    left: -25px;
+  .flickity-button:disabled {
+    opacity: 0.3;
+    cursor: auto;
   }
 
-  .slider-nav.next {
-    right: -25px;
+  .flickity-button-icon {
+    fill: {{ section.settings.arrow_color }};
   }
 
-  .slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 30px;
+  .flickity-prev-next-button.previous {
+    left: {{ section.settings.arrow_position }}px;
   }
 
-  .slider-dot {
+  .flickity-prev-next-button.next {
+    right: {{ section.settings.arrow_position }}px;
+  }
+
+  {% unless section.settings.show_arrows %}
+  .flickity-button {
+    display: none;
+  }
+  {% endunless %}
+
+  /* Custom Flickity Dots */
+  .flickity-page-dots {
+    bottom: -50px;
+    text-align: center;
+  }
+
+  .flickity-page-dots .dot {
+    display: inline-block;
     width: 12px;
     height: 12px;
-    border-radius: 50%;
+    margin: 0 5px;
     background: {{ section.settings.dot_inactive_color }};
-    border: none;
+    border-radius: 50%;
+    opacity: 0.25;
     cursor: pointer;
     transition: all 0.3s ease;
   }
 
-  .slider-dot.active {
+  .flickity-page-dots .dot.is-selected {
     background: {{ section.settings.dot_active_color }};
+    opacity: 1;
     transform: scale(1.2);
   }
 
-  /* Responsive Design */
-  @media (min-width: 1200px) {
-    .category-item { width: calc(100% / {{ section.settings.items_desktop }}); }
+  {% unless section.settings.show_dots %}
+  .flickity-page-dots {
+    display: none;
   }
+  {% endunless %}
 
-  @media (min-width: 768px) and (max-width: 1199px) {
-    .category-item { width: calc(100% / {{ section.settings.items_tablet }}); }
+  /* Responsive Design */
+  @media (max-width: 1199px) {
+    .category-cell {
+      width: {{ 100 | divided_by: section.settings.items_tablet }}%;
+    }
   }
 
   @media (max-width: 767px) {
-    .category-item { width: calc(100% / {{ section.settings.items_mobile }}); }
-    .category-image { height: 120px; }
-    .slider-nav { width: 40px; height: 40px; font-size: 16px; }
-    .slider-nav.prev { left: -20px; }
-    .slider-nav.next { right: -20px; }
+    .category-cell {
+      width: {{ 100 | divided_by: section.settings.items_mobile }}%;
+      padding: 0 8px;
+    }
+    
+    .category-image {
+      height: 120px;
+      max-width: 120px;
+    }
+    
+    .flickity-button {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .flickity-prev-next-button.previous {
+      left: 10px;
+    }
+    
+    .flickity-prev-next-button.next {
+      right: 10px;
+    }
+
+    .featured-categories-container {
+      padding: 0 {{ section.settings.container_padding | divided_by: 2 }}px;
+    }
   }
 
   @media (max-width: 480px) {
-    .featured-categories-container { padding: 0 15px; }
-    .categories-track { gap: 15px; }
+    .category-cell {
+      padding: 0 5px;
+    }
+    
+    .category-image {
+      height: 100px;
+      max-width: 100px;
+    }
+  }
+
+  /* Loading State */
+  .categories-flickity:not(.flickity-enabled) {
+    opacity: 0.5;
+  }
+
+  .categories-flickity.flickity-enabled {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Custom scrollbar for touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .flickity-viewport {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 </style>
 
@@ -159,220 +257,125 @@
       <h2 class="section-title">{{ section.settings.title }}</h2>
     {% endif %}
 
-    <div class="categories-slider" id="categories-slider-{{ section.id }}">
-      <div class="categories-track" id="categories-track-{{ section.id }}">
-        {% for block in section.blocks %}
-          <div class="category-item" {{ block.shopify_attributes }}>
-            <a href="{{ block.settings.collection.url | default: '#' }}">
-              {% if block.settings.image != blank %}
-                <img 
-                  src="{{ block.settings.image | image_url: width: 300 }}" 
-                  alt="{{ block.settings.category_name }}"
-                  class="category-image"
-                  loading="lazy"
-                >
-              {% else %}
-                <div class="category-image" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);"></div>
-              {% endif %}
-              <h3 class="category-name">{{ block.settings.category_name | default: block.settings.collection.title }}</h3>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-
-      {% if section.settings.show_arrows %}
-        <button class="slider-nav prev" id="prev-{{ section.id }}" aria-label="Previous">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-          </svg>
-        </button>
-        <button class="slider-nav next" id="next-{{ section.id }}" aria-label="Next">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-          </svg>
-        </button>
-      {% endif %}
+    <div class="categories-flickity" 
+         data-flickity='{
+           "cellAlign": "{{ section.settings.cell_align }}",
+           "contain": true,
+           "prevNextButtons": {{ section.settings.show_arrows }},
+           "pageDots": {{ section.settings.show_dots }},
+           "autoPlay": {% if section.settings.auto_slide %}{{ section.settings.slide_interval | times: 1000 }}{% else %}false{% endif %},
+           "pauseAutoPlayOnHover": true,
+           "wrapAround": {{ section.settings.wrap_around }},
+           "freeScroll": {{ section.settings.free_scroll }},
+           "groupCells": {{ section.settings.group_cells }},
+           "lazyLoad": {{ section.settings.lazy_load }},
+           "adaptiveHeight": false,
+           "setGallerySize": true,
+           "imagesLoaded": true,
+           "percentPosition": false
+         }'>
+      
+      {% for block in section.blocks %}
+        <div class="category-cell" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.collection.url | default: '#' }}" class="category-link">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 300 }}" 
+                alt="{{ block.settings.category_name | default: block.settings.collection.title }}"
+                class="category-image"
+                {% if section.settings.lazy_load %}data-flickity-lazyload="{{ block.settings.image | image_url: width: 300 }}"{% endif %}
+                loading="lazy"
+              >
+            {% else %}
+              <div class="category-image" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); display: flex; align-items: center; justify-content: center; color: #999;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+            {% endif %}
+            <h3 class="category-name">
+              {{ block.settings.category_name | default: block.settings.collection.title | default: "Category" }}
+            </h3>
+          </a>
+        </div>
+      {% endfor %}
     </div>
-
-    {% if section.settings.show_dots and section.blocks.size > section.settings.items_desktop %}
-      <div class="slider-dots" id="slider-dots-{{ section.id }}"></div>
-    {% endif %}
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const sectionId = '{{ section.id }}';
-    const slider = document.getElementById(`categories-slider-${sectionId}`);
-    const track = document.getElementById(`categories-track-${sectionId}`);
-    const prevBtn = document.getElementById(`prev-${sectionId}`);
-    const nextBtn = document.getElementById(`next-${sectionId}`);
-    const dotsContainer = document.getElementById(`slider-dots-${sectionId}`);
+document.addEventListener('DOMContentLoaded', function() {
+  // Wait for Flickity to load
+  if (typeof Flickity !== 'undefined') {
+    initializeFlickity();
+  } else {
+    // Fallback: wait a bit more for Flickity to load
+    setTimeout(initializeFlickity, 500);
+  }
+
+  function initializeFlickity() {
+    const flickityElements = document.querySelectorAll('.categories-flickity');
     
-    const settings = {
-      autoSlide: {{ section.settings.auto_slide }},
-      slideInterval: {{ section.settings.slide_interval | times: 1000 }},
-      animationDuration: {{ section.settings.animation_duration }},
-      itemsDesktop: {{ section.settings.items_desktop }},
-      itemsTablet: {{ section.settings.items_tablet }},
-      itemsMobile: {{ section.settings.items_mobile }}
-    };
+    flickityElements.forEach(function(elem) {
+      if (!elem.classList.contains('flickity-enabled')) {
+        try {
+          // Initialize Flickity
+          const flkty = new Flickity(elem, {
+            cellAlign: '{{ section.settings.cell_align }}',
+            contain: true,
+            prevNextButtons: {{ section.settings.show_arrows }},
+            pageDots: {{ section.settings.show_dots }},
+            autoPlay: {% if section.settings.auto_slide %}{{ section.settings.slide_interval | times: 1000 }}{% else %}false{% endif %},
+            pauseAutoPlayOnHover: true,
+            wrapAround: {{ section.settings.wrap_around }},
+            freeScroll: {{ section.settings.free_scroll }},
+            groupCells: {{ section.settings.group_cells }},
+            lazyLoad: {{ section.settings.lazy_load }},
+            adaptiveHeight: false,
+            setGallerySize: true,
+            imagesLoaded: true,
+            percentPosition: false,
+            accessibility: true,
+            rightToLeft: {{ settings.text_direction == 'rtl' }}
+          });
 
-    let currentSlide = 0;
-    let autoSlideTimer;
-    let isAnimating = false;
+          // Custom event listeners
+          flkty.on('ready', function() {
+            elem.style.opacity = '1';
+          });
 
-    function getItemsPerView() {
-      if (window.innerWidth >= 1200) return settings.itemsDesktop;
-      if (window.innerWidth >= 768) return settings.itemsTablet;
-      return settings.itemsMobile;
-    }
+          // Pause autoplay when user interacts
+          elem.addEventListener('mouseenter', function() {
+            flkty.pausePlayer();
+          });
 
-    function getTotalSlides() {
-      const items = track.children.length;
-      const itemsPerView = getItemsPerView();
-      return Math.ceil(items / itemsPerView);
-    }
+          elem.addEventListener('mouseleave', function() {
+            flkty.unpausePlayer();
+          });
 
-    function updateSlider() {
-      if (isAnimating) return;
-      isAnimating = true;
+          // Accessibility improvements
+          elem.addEventListener('focus', function() {
+            flkty.pausePlayer();
+          });
 
-      const itemsPerView = getItemsPerView();
-      const slideWidth = 100 / itemsPerView;
-      const translateX = -(currentSlide * slideWidth * itemsPerView);
-      
-      track.style.transform = `translateX(${translateX}%)`;
+          elem.addEventListener('blur', function() {
+            flkty.unpausePlayer();
+          });
 
-      updateDots();
-
-      setTimeout(() => {
-        isAnimating = false;
-      }, settings.animationDuration);
-    }
-
-    function createDots() {
-      if (!dotsContainer) return;
-      
-      dotsContainer.innerHTML = '';
-      const totalSlides = getTotalSlides();
-      
-      for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'slider-dot';
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-      }
-      updateDots();
-    }
-
-    function updateDots() {
-      if (!dotsContainer) return;
-      
-      const dots = dotsContainer.querySelectorAll('.slider-dot');
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-      });
-    }
-
-    function goToSlide(slideIndex) {
-      const totalSlides = getTotalSlides();
-      currentSlide = Math.max(0, Math.min(slideIndex, totalSlides - 1));
-      updateSlider();
-      resetAutoSlide();
-    }
-
-    function nextSlide() {
-      const totalSlides = getTotalSlides();
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlider();
-      resetAutoSlide();
-    }
-
-    function prevSlide() {
-      const totalSlides = getTotalSlides();
-      currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
-      updateSlider();
-      resetAutoSlide();
-    }
-
-    function startAutoSlide() {
-      if (!settings.autoSlide) return;
-      
-      autoSlideTimer = setInterval(() => {
-        nextSlide();
-      }, settings.slideInterval);
-    }
-
-    function stopAutoSlide() {
-      if (autoSlideTimer) {
-        clearInterval(autoSlideTimer);
-      }
-    }
-
-    function resetAutoSlide() {
-      stopAutoSlide();
-      startAutoSlide();
-    }
-
-    // Event listeners
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-
-    // Pause auto-slide on hover
-    slider.addEventListener('mouseenter', stopAutoSlide);
-    slider.addEventListener('mouseleave', startAutoSlide);
-
-    // Touch/swipe support
-    let startX, startY, distX, distY;
-    
-    slider.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    });
-
-    slider.addEventListener('touchmove', (e) => {
-      if (!startX || !startY) return;
-      
-      distX = e.touches[0].clientX - startX;
-      distY = e.touches[0].clientY - startY;
-      
-      if (Math.abs(distX) > Math.abs(distY)) {
-        e.preventDefault();
-      }
-    });
-
-    slider.addEventListener('touchend', () => {
-      if (!startX || !startY) return;
-      
-      if (Math.abs(distX) > 50) {
-        if (distX > 0) {
-          prevSlide();
-        } else {
-          nextSlide();
+        } catch (error) {
+          console.warn('Flickity initialization failed:', error);
         }
       }
-      
-      startX = null;
-      startY = null;
     });
+  }
 
-    // Window resize handler
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        currentSlide = 0;
-        createDots();
-        updateSlider();
-      }, 250);
+  // Reinitialize on theme editor changes
+  if (window.Shopify && window.Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function(event) {
+      setTimeout(initializeFlickity, 100);
     });
-
-    // Initialize
-    createDots();
-    updateSlider();
-    startAutoSlide();
-  });
+  }
+});
 </script>
 
 {% schema %}
@@ -383,7 +386,24 @@
   "settings": [
     {
       "type": "header",
-      "content": "Section Settings"
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width Layout",
+      "default": false,
+      "info": "Extend slider to full browser width"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container Side Padding (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "info": "Only applies when Full Width is enabled"
     },
     {
       "type": "text",
@@ -394,7 +414,7 @@
     {
       "type": "range",
       "id": "title_size",
-      "label": "Title Font Size",
+      "label": "Title Font Size (px)",
       "min": 16,
       "max": 40,
       "step": 2,
@@ -415,7 +435,7 @@
     {
       "type": "range",
       "id": "section_padding_top",
-      "label": "Section Padding Top",
+      "label": "Section Padding Top (px)",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -424,7 +444,7 @@
     {
       "type": "range",
       "id": "section_padding_bottom",
-      "label": "Section Padding Bottom",
+      "label": "Section Padding Bottom (px)",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -432,21 +452,21 @@
     },
     {
       "type": "header",
-      "content": "Slider Settings"
+      "content": "Flickity Slider Settings"
     },
     {
       "type": "range",
       "id": "items_desktop",
-      "label": "Items per slide (Desktop)",
+      "label": "Items Visible (Desktop)",
       "min": 1,
-      "max": 8,
+      "max": 10,
       "step": 1,
       "default": 7
     },
     {
       "type": "range",
       "id": "items_tablet",
-      "label": "Items per slide (Tablet)",
+      "label": "Items Visible (Tablet)",
       "min": 1,
       "max": 6,
       "step": 1,
@@ -455,11 +475,22 @@
     {
       "type": "range",
       "id": "items_mobile",
-      "label": "Items per slide (Mobile)",
+      "label": "Items Visible (Mobile)",
       "min": 1,
       "max": 4,
       "step": 1,
       "default": 2
+    },
+    {
+      "type": "select",
+      "id": "cell_align",
+      "label": "Cell Alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "left"
     },
     {
       "type": "checkbox",
@@ -477,13 +508,32 @@
       "default": 4
     },
     {
-      "type": "range",
-      "id": "animation_duration",
-      "label": "Animation Duration (ms)",
-      "min": 200,
-      "max": 1000,
-      "step": 50,
-      "default": 500
+      "type": "checkbox",
+      "id": "wrap_around",
+      "label": "Infinite Loop",
+      "default": true,
+      "info": "Loop around to beginning when reaching end"
+    },
+    {
+      "type": "checkbox",
+      "id": "free_scroll",
+      "label": "Free Scroll",
+      "default": false,
+      "info": "Allow continuous scrolling instead of cell-by-cell"
+    },
+    {
+      "type": "checkbox",
+      "id": "group_cells",
+      "label": "Group Cells",
+      "default": true,
+      "info": "Group cells together for smoother navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy_load",
+      "label": "Lazy Load Images",
+      "default": true,
+      "info": "Load images as they come into view"
     },
     {
       "type": "header",
@@ -494,6 +544,24 @@
       "id": "show_arrows",
       "label": "Show Navigation Arrows",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "arrow_position",
+      "label": "Arrow Position from Edge (px)",
+      "min": -50,
+      "max": 50,
+      "step": 5,
+      "default": -25
+    },
+    {
+      "type": "range",
+      "id": "arrow_opacity",
+      "label": "Arrow Opacity (%)",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 80
     },
     {
       "type": "color",
@@ -532,7 +600,7 @@
     {
       "type": "range",
       "id": "category_name_size",
-      "label": "Category Name Font Size",
+      "label": "Category Name Font Size (px)",
       "min": 12,
       "max": 24,
       "step": 1,
