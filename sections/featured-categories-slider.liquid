@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
               percentPosition: false,
               dragThreshold: {{ section.settings.drag_threshold }},
               accessibility: true,
-              rightToLeft: {{ settings.text_direction == 'rtl' }}
+            rightToLeft: {% if settings.text_direction == 'rtl' %}true{% else %}false{% endif %}
             });
 
             // Custom event listeners
