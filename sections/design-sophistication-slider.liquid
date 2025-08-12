@@ -108,6 +108,7 @@
   padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
   background-color: {{ section.settings.background_color }};
   font-family: 'Futura', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Main Container */
@@ -119,6 +120,7 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
+  overflow: hidden; /* Prevent horizontal overflow */
 }
 
 /* Left Text Content */
@@ -205,7 +207,8 @@
   position: absolute;
   left: 732px;
   top: 0;
-  width: 1068px;
+  width: calc(100% - 732px); /* Use remaining width instead of fixed 1068px */
+  max-width: 1068px; /* Maximum width to prevent overflow */
   height: 653px;
   overflow: hidden;
 }
@@ -345,7 +348,7 @@
   white-space: nowrap;
 }
 
-/* Swiper Navigation */
+/* Swiper Navigation - Desktop Only */
 .swiper-button-next,
 .swiper-button-prev {
   width: {{ section.settings.arrow_size }}px;
@@ -361,6 +364,7 @@
   top: auto;
   bottom: 30px;
   margin-top: 0;
+  z-index: 10;
 }
 
 .swiper-button-prev {
@@ -387,12 +391,20 @@
   font-weight: bold;
 }
 
+/* Hide arrows completely on mobile and when disabled */
 {% unless section.settings.show_arrows %}
 .swiper-button-next,
 .swiper-button-prev {
-  display: none;
+  display: none !important;
 }
 {% endunless %}
+
+@media (max-width: {{ section.settings.mobile_breakpoint }}px) {
+  .design-sophistication-section .swiper-button-next,
+  .design-sophistication-section .swiper-button-prev {
+    display: none !important; /* Force hide on mobile to avoid conflicts */
+  }
+}
 
 /* Responsive Design */
 @media (max-width: {{ section.settings.mobile_breakpoint }}px) {
@@ -438,6 +450,7 @@
     order: {{ section.settings.mobile_slider_order }};
     margin: 0 -20px;
     padding: 0 20px;
+    overflow-x: auto; /* Allow horizontal scroll on mobile */
   }
   
   .product-slide {
@@ -477,17 +490,7 @@
   
   .swiper-button-next,
   .swiper-button-prev {
-    width: 40px;
-    height: 40px;
-    bottom: 20px;
-  }
-  
-  .swiper-button-prev {
-    left: 20px;
-  }
-  
-  .swiper-button-next {
-    left: 75px;
+    display: none !important; /* Completely hide arrows on mobile */
   }
 }
 
@@ -600,70 +603,84 @@
 </style>
 
 <script>
-// Initialize Swiper
+// Initialize Swiper with unique class to avoid conflicts
 function initializeProductSwiper() {
-  console.log('Initializing Product Swiper...');
+  console.log('Initializing Design Product Swiper...');
   
   if (typeof Swiper !== 'undefined') {
     try {
-      const swiper = new Swiper('.products-swiper .swiper-container', {
-        slidesPerView: 'auto',
-        spaceBetween: {{ section.settings.slide_spacing }},
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        loop: {{ section.settings.infinite_loop }},
-        autoplay: {% if section.settings.autoplay %}
-        {
-          delay: {{ section.settings.autoplay_delay | times: 1000 }},
-          disableOnInteraction: {{ section.settings.pause_on_interaction }},
-          pauseOnMouseEnter: {{ section.settings.pause_on_hover }}
-        }
-        {% else %}false{% endif %},
-        speed: {{ section.settings.transition_speed }},
-        effect: '{{ section.settings.transition_effect }}',
-        freeMode: {
-          enabled: true,
-          sticky: false,
-        },
-        centeredSlides: false,
-        grabCursor: true,
-        breakpoints: {
-          320: {
-            slidesPerView: 1.2,
-            spaceBetween: 15
+      // Use more specific selector to avoid conflicts
+      const swiperContainer = document.querySelector('.design-sophistication-section .products-swiper .swiper-container');
+      
+      if (swiperContainer && !swiperContainer.classList.contains('swiper-initialized')) {
+        const swiper = new Swiper(swiperContainer, {
+          slidesPerView: 'auto',
+          spaceBetween: {{ section.settings.slide_spacing }},
+          navigation: {
+            nextEl: '.design-sophistication-section .swiper-button-next',
+            prevEl: '.design-sophistication-section .swiper-button-prev',
           },
-          480: {
-            slidesPerView: 1.5,
-            spaceBetween: 20
-          },
-          768: {
-            slidesPerView: 'auto',
-            spaceBetween: {{ section.settings.slide_spacing }}
-          },
-          1024: {
-            slidesPerView: 'auto',
-            spaceBetween: {{ section.settings.slide_spacing }}
+          loop: {{ section.settings.infinite_loop }},
+          autoplay: {% if section.settings.autoplay %}
+          {
+            delay: {{ section.settings.autoplay_delay | times: 1000 }},
+            disableOnInteraction: {{ section.settings.pause_on_interaction }},
+            pauseOnMouseEnter: {{ section.settings.pause_on_hover }}
           }
-        },
-        on: {
-          init: function() {
-            console.log('Product Swiper initialized successfully!');
+          {% else %}false{% endif %},
+          speed: {{ section.settings.transition_speed }},
+          effect: '{{ section.settings.transition_effect }}',
+          freeMode: {
+            enabled: true,
+            sticky: false,
           },
-          resize: function() {
-            this.update();
+          centeredSlides: false,
+          grabCursor: true,
+          watchOverflow: true, /* Disable swiper when not enough slides */
+          breakpoints: {
+            320: {
+              slidesPerView: 1.2,
+              spaceBetween: 15,
+              navigation: false /* Disable navigation on mobile */
+            },
+            480: {
+              slidesPerView: 1.5,
+              spaceBetween: 20,
+              navigation: false /* Disable navigation on mobile */
+            },
+            768: {
+              slidesPerView: 'auto',
+              spaceBetween: {{ section.settings.slide_spacing }},
+              navigation: false /* Disable navigation on tablet */
+            },
+            {{ section.settings.mobile_breakpoint | plus: 1 }}: {
+              slidesPerView: 'auto',
+              spaceBetween: {{ section.settings.slide_spacing }},
+              navigation: {
+                nextEl: '.design-sophistication-section .swiper-button-next',
+                prevEl: '.design-sophistication-section .swiper-button-prev',
+              }
+            }
+          },
+          on: {
+            init: function() {
+              console.log('Design Product Swiper initialized successfully!');
+            },
+            resize: function() {
+              this.update();
+            }
           }
-        }
-      });
+        });
 
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        swiper.update();
-      });
-
+        // Handle window resize
+        window.addEventListener('resize', function() {
+          if (swiper && !swiper.destroyed) {
+            swiper.update();
+          }
+        });
+      }
     } catch (error) {
-      console.error('Error initializing Product Swiper:', error);
+      console.error('Error initializing Design Product Swiper:', error);
     }
   } else {
     console.error('Swiper library not loaded! Retrying...');
@@ -692,8 +709,6 @@ if (window.Shopify && window.Shopify.designMode) {
   });
 }
 </script>
-
-
 {% schema %}
     {
       "name": "Design Slider",
@@ -702,7 +717,7 @@ if (window.Shopify && window.Shopify.designMode) {
       "settings": [
         {
           "type": "header",
-          "content": "Layout Settings"
+          "content": "🎛️ Layout Settings"
         },
         {
           "type": "range",
