@@ -28,14 +28,14 @@
     </div>
 
     <!-- Navigation -->
-    <div class="slider-header">
-      <div class="swiper-nav">
-        <div class="swiper-button-prev">
+    <div class="art-slider-header">
+      <div class="art-slider-nav">
+        <div class="art-slider-button-prev">
           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6.3105 12.0258H20.25C20.4489 12.0258 20.6397 12.1049 20.7803 12.2455C20.921 12.3862 21 12.5769 21 12.7758C21 12.9748 20.921 13.1655 20.7803 13.3062C20.6397 13.4468 20.4489 13.5258 20.25 13.5258H6.3105L11.781 18.9948C11.9218 19.1357 12.0009 19.3267 12.0009 19.5258C12.0009 19.725 11.9218 19.916 11.781 20.0568C11.6402 20.1977 11.4492 20.2768 11.25 20.2768C11.0508 20.2768 10.8598 20.1977 10.719 20.0568L3.969 13.3068C3.89915 13.2372 3.84374 13.1544 3.80593 13.0633C3.76812 12.9722 3.74866 12.8745 3.74866 12.7758C3.74866 12.6772 3.76812 12.5795 3.80593 12.4884C3.84374 12.3973 3.89915 12.3145 3.969 12.2448L10.719 5.49485C10.8598 5.35402 11.0508 5.2749 11.25 5.2749C11.4492 5.2749 11.6402 5.35402 11.781 5.49485C11.9218 5.63568 12.0009 5.82669 12.0009 6.02585C12.0009 6.22501 11.9218 6.41602 11.781 6.55685L6.3105 12.0258Z" fill="#757575"/>
           </svg>
         </div>
-        <div class="swiper-button-next">
+        <div class="art-slider-button-next">
           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.6895 12.0258H3.75C3.55109 12.0258 3.36032 12.1049 3.21967 12.2455C3.07902 12.3862 3 12.5769 3 12.7758C3 12.9748 3.07902 13.1655 3.21967 13.3062C3.36032 13.4468 3.55109 13.5258 3.75 13.5258H17.6895L12.219 18.9948C12.0782 19.1357 11.9991 19.3267 11.9991 19.5258C11.9991 19.725 12.0782 19.916 12.219 20.0568C12.3598 20.1977 12.5508 20.2768 12.75 20.2768C12.9492 20.2768 13.1402 20.1977 13.281 20.0568L20.031 13.3068C20.1008 13.2372 20.1563 13.1544 20.1941 13.0633C20.2319 12.9722 20.2513 12.8745 20.2513 12.7758C20.2513 12.6772 20.2319 12.5795 20.1941 12.4884C20.1563 12.3973 20.1008 12.3145 20.031 12.2448L13.281 5.49485C13.1402 5.35402 12.9492 5.2749 12.75 5.2749C12.5508 5.2749 12.3598 5.35402 12.219 5.49485C12.0782 5.63568 11.9991 5.82669 11.9991 6.02585C11.9991 6.22501 12.0782 6.41602 12.219 6.55685L17.6895 12.0258Z" fill="#333333"/>
           </svg>
@@ -103,22 +103,26 @@
   align-self: flex-start;
 }
 
-.slider-header {
+.art-slider-header {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.swiper-nav {
+.art-slider-nav {
   display: flex;
   gap: 20px;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.art-slider-button-prev,
+.art-slider-button-next {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .art-slider-header { display: none; }
 }
 
 .swiper-progressbar {
@@ -150,8 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
       slidesPerView: 2,
       spaceBetween: 20,
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.art-slider-button-next',
+        prevEl: '.art-slider-button-prev',
       },
       breakpoints: {
         320: { slidesPerView: 1.2, spaceBetween: 10 },
