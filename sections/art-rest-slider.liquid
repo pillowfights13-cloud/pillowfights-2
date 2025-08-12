@@ -1,192 +1,175 @@
-<section class="art-of-rest-section">
-  <div class="art-of-rest-container">
-    <div class="art-of-rest-header">
-      {% if section.settings.title != blank %}
-        <h3>{{ section.settings.title }}</h3>
-      {% endif %}
-      {% if section.settings.description != blank %}
-        <p>{{ section.settings.description }}</p>
-      {% endif %}
-    </div>
-
-    <div class="slider-header">
-      <div class="swiper-nav">
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-    </div>
-
-    <div class="swiper art-of-rest-swiper">
-      <div class="swiper-wrapper">
-        {% for block in section.blocks %}
-          <div class="swiper-slide">
-            {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt | escape }}">
-            {% endif %}
-            {% if block.settings.link_label != blank and block.settings.link_url != blank %}
-              <a href="{{ block.settings.link_url }}" class="slide-link">
-                {{ block.settings.link_label }} &gt;
-              </a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-
-      <!-- Progress bar -->
-      <div class="swiper-progressbar"></div>
-    </div>
-  </div>
-</section>
-
-<style>
-.art-of-rest-section {
-  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-}
-
-.art-of-rest-container {
-  margin: 0 120px; /* Desktop spacing */
-}
-
-.art-of-rest-header {
-  text-align: center;
-  max-width: {{ section.settings.max_width }}px;
-  margin: 0 auto 20px;
-}
-
-.art-of-rest-header h3 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.art-of-rest-header p {
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0;
-}
-
-.slider-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-}
-
-.swiper-nav {
-  display: flex;
-  gap: 10px;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: static; /* so they stay in place */
-  color: #000;
-}
-
-.art-of-rest-swiper {
-  width: 100%;
-  position: relative;
-}
-
-.art-of-rest-swiper .swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.art-of-rest-swiper img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.slide-link {
-  margin-top: 8px;
-  font-weight: 500;
-  text-decoration: none;
-  color: #000;
-}
-
-/* Progress bar styles */
-.swiper-progressbar {
-  height: 4px;
-  background-color: black; /* track color */
-  position: relative;
-}
-
-.swiper-progressbar-fill {
-  background-color: #C49B66; /* indicator color */
-  height: 100%;
-  width: 0;
-}
-
-@media (max-width: 768px) {
-  .art-of-rest-container {
-    margin: 0 20px;
-  }
-  .art-of-rest-header h3 { font-size: 20px; }
-  .art-of-rest-header p { font-size: 14px; }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof Swiper !== 'undefined') {
-    new Swiper('.art-of-rest-swiper', {
-      slidesPerView: 2,
-      spaceBetween: 20,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-progressbar',
-        type: 'progressbar',
-        progressbarFillClass: 'swiper-progressbar-fill'
-      },
-      breakpoints: {
-        320: { slidesPerView: 1.2, spaceBetween: 10 },
-        768: { slidesPerView: 2, spaceBetween: 20 }
-      }
-    });
-  }
-});
-</script>
-
 {% schema %}
-{
-  "name": "Art of Rest Slider",
-  "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "The Art of Rest, Layered to Perfection" },
-    { "type": "textarea", "id": "description", "label": "Description", "default": "Cloud-soft pillows and breathable quilts—crafted for comfort, designed to elevate every layer of your bed." },
-    { "type": "range", "id": "max_width", "label": "Max Width (px)", "min": 800, "max": 1600, "step": 50, "default": 1200 },
-    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 120, "step": 5, "default": 40 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 120, "step": 5, "default": 40 }
-  ],
-  "blocks": [
     {
-      "type": "slide",
-      "name": "Slide",
+      "name": "Coming Soon Slider",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "link_label", "label": "Link Label", "default": "Shop Pillows" },
-        { "type": "url", "id": "link_url", "label": "Link URL" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Art of Rest Slider",
-      "category": "Custom",
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The Art of Rest, Layered to Perfection"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Cloud-soft pillows and breathable quilts—crafted for comfort, designed to elevate every layer of your bed."
+        },
+        {
+          "type": "color",
+          "id": "progress_bar_color",
+          "label": "Progress Bar Base Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "progress_indicator_color",
+          "label": "Progress Indicator Color",
+          "default": "#C49B66"
+        }
+      ],
       "blocks": [
-        { "type": "slide" },
-        { "type": "slide" }
+        {
+          "type": "slide",
+          "name": "Slide",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Slide Image"
+            },
+            {
+              "type": "text",
+              "id": "caption",
+              "label": "Caption",
+              "default": "Shop Pillows"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Coming Soon Slider",
+          "category": "Custom"
+        }
       ]
     }
-  ]
-}
-{% endschema %}
+    {% endschema %}
+    
+    <div class="coming-soon-container">
+      <div class="coming-soon-header">
+        <h3>{{ section.settings.heading }}</h3>
+        <p>{{ section.settings.description }}</p>
+      </div>
+    
+      <div class="slider-wrapper">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+                {% endif %}
+                <div class="slide-caption">{{ block.settings.caption }} ></div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+    
+        <div class="slider-controls">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+    
+        <div class="progress-bar">
+          <div class="progress-indicator"></div>
+        </div>
+      </div>
+    </div>
+    
+    <style>
+    .coming-soon-container {
+      margin: 0 120px;
+    }
+    
+    .coming-soon-header {
+      max-width: 550px;
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+    
+    .coming-soon-header h3 {
+      font-weight: normal;
+    }
+    
+    .slider-wrapper {
+      position: relative;
+    }
+    
+    .swiper-container {
+      padding-bottom: 30px; /* space for progress bar */
+    }
+    
+    .swiper-slide {
+      width: 550px;
+      flex-shrink: 0;
+    }
+    
+    .swiper-slide img {
+      width: 100%;
+      border-radius: 4px;
+    }
+    
+    .slide-caption {
+      text-align: left;
+      margin-top: 8px;
+    }
+    
+    .slider-controls {
+      position: absolute;
+      right: 0;
+      bottom: 3px; /* sits on top of progress bar */
+      display: flex;
+      gap: 10px;
+    }
+    
+    .slider-controls .swiper-button-prev,
+    .slider-controls .swiper-button-next {
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .progress-bar {
+      border-bottom: 3px solid {{ section.settings.progress_bar_color }};
+      position: relative;
+      margin-top: 10px;
+    }
+    
+    .progress-indicator {
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      height: 3px;
+      background-color: {{ section.settings.progress_indicator_color }};
+      width: 0;
+    }
+    </style>
+    
+    <script>
+      var swiper{{ section.id }} = new Swiper('.swiper-container', {
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        on: {
+          progress: function (progress) {
+            document.querySelector('.progress-indicator').style.width = (progress * 100) + '%';
+          }
+        }
+      });
+    </script>
+    
