@@ -1002,7 +1002,7 @@ if (window.Shopify && window.Shopify.designMode) {
           "id": "slides_mobile",
           "label": "Slides per View (Mobile)",
           "min": 1,
-          "max": 2,
+          "max": 3,
           "step": 1,
           "default": 1
         },
@@ -1095,7 +1095,7 @@ if (window.Shopify && window.Shopify.designMode) {
           "min": 30,
           "max": 60,
           "step": 5,
-          "default": 44
+          "default": 45
         },
         {
           "type": "range",
@@ -1168,7 +1168,7 @@ if (window.Shopify && window.Shopify.designMode) {
           "min": 600,
           "max": 1000,
           "step": 50,
-          "default": 768
+          "default": 750
         },
         {
           "type": "range",
@@ -1200,23 +1200,25 @@ if (window.Shopify && window.Shopify.designMode) {
           "default": "left"
         },
         {
-          "type": "range",
+          "type": "select",
           "id": "mobile_text_order",
           "label": "Mobile Text Order",
-          "min": 1,
-          "max": 2,
-          "step": 1,
-          "default": 1,
+          "options": [
+            {"value": "1", "label": "Text First"},
+            {"value": "2", "label": "Text Second"}
+          ],
+          "default": "1",
           "info": "1 = Text first, 2 = Text second"
         },
         {
-          "type": "range",
+          "type": "select",
           "id": "mobile_slider_order",
           "label": "Mobile Slider Order",
-          "min": 1,
-          "max": 2,
-          "step": 1,
-          "default": 2,
+          "options": [
+            {"value": "1", "label": "Slider First"},
+            {"value": "2", "label": "Slider Second"}
+          ],
+          "default": "2",
           "info": "1 = Slider first, 2 = Slider second"
         },
         {
@@ -1253,7 +1255,7 @@ if (window.Shopify && window.Shopify.designMode) {
           "min": 200,
           "max": 300,
           "step": 20,
-          "default": 250
+          "default": 240
         }
       ],
       "blocks": [
