@@ -1,23 +1,27 @@
-{% comment %}
-Section: Art of Rest Slider
-{% endcomment %}
-
 <section class="art-of-rest-section">
-  <div class="art-of-rest-container" style="max-width: {{ section.settings.max_width }}px; text-align: {{ section.settings.text_alignment }};">
-    {% if section.settings.title != blank %}
-      <h3>{{ section.settings.title }}</h3>
-    {% endif %}
+  <div class="art-of-rest-container">
+    <div class="art-of-rest-header">
+      {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title }}</h3>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p>{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
 
-    {% if section.settings.description != blank %}
-      <p>{{ section.settings.description }}</p>
-    {% endif %}
+    <div class="slider-header">
+      <div class="swiper-nav">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
 
     <div class="swiper art-of-rest-swiper">
       <div class="swiper-wrapper">
         {% for block in section.blocks %}
           <div class="swiper-slide">
             {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.image.alt | escape }}">
+              <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt | escape }}">
             {% endif %}
             {% if block.settings.link_label != blank and block.settings.link_url != blank %}
               <a href="{{ block.settings.link_url }}" class="slide-link">
@@ -28,12 +32,8 @@ Section: Art of Rest Slider
         {% endfor %}
       </div>
 
-      <!-- Navigation -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
+      <!-- Progress bar -->
+      <div class="swiper-progressbar"></div>
     </div>
   </div>
 </section>
@@ -42,37 +42,94 @@ Section: Art of Rest Slider
 .art-of-rest-section {
   padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
 }
-.art-of-rest-container h3 {
+
+.art-of-rest-container {
+  margin: 0 120px; /* Desktop spacing */
+}
+
+.art-of-rest-header {
+  text-align: center;
+  max-width: {{ section.settings.max_width }}px;
+  margin: 0 auto 20px;
+}
+
+.art-of-rest-header h3 {
   font-size: 24px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
-.art-of-rest-container p {
+
+.art-of-rest-header p {
   font-size: 16px;
-  margin-bottom: 20px;
+  font-weight: normal;
+  margin: 0;
 }
+
+.slider-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.swiper-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: static; /* so they stay in place */
+  color: #000;
+}
+
 .art-of-rest-swiper {
   width: 100%;
+  position: relative;
 }
+
 .art-of-rest-swiper .swiper-slide {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
+
 .art-of-rest-swiper img {
   width: 100%;
   height: auto;
   border-radius: 4px;
 }
+
 .slide-link {
   margin-top: 8px;
   font-weight: 500;
   text-decoration: none;
   color: #000;
 }
+
+/* Progress bar styles */
+.swiper-progressbar {
+  height: 4px;
+  background-color: black; /* track color */
+  position: relative;
+}
+
+.swiper-progressbar-fill {
+  background-color: #C49B66; /* indicator color */
+  height: 100%;
+  width: 0;
+}
+
 @media (max-width: 768px) {
-  .art-of-rest-container h3 { font-size: 20px; }
-  .art-of-rest-container p { font-size: 14px; }
+  .art-of-rest-container {
+    margin: 0 20px;
+  }
+  .art-of-rest-header h3 { font-size: 20px; }
+  .art-of-rest-header p { font-size: 14px; }
 }
 </style>
 
@@ -87,8 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
         prevEl: '.swiper-button-prev',
       },
       pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+        el: '.swiper-progressbar',
+        type: 'progressbar',
+        progressbarFillClass: 'swiper-progressbar-fill'
       },
       breakpoints: {
         320: { slidesPerView: 1.2, spaceBetween: 10 },
@@ -105,11 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
   "settings": [
     { "type": "text", "id": "title", "label": "Title", "default": "The Art of Rest, Layered to Perfection" },
     { "type": "textarea", "id": "description", "label": "Description", "default": "Cloud-soft pillows and breathable quilts—crafted for comfort, designed to elevate every layer of your bed." },
-    { "type": "select", "id": "text_alignment", "label": "Text Alignment", "options": [
-      { "value": "left", "label": "Left" },
-      { "value": "center", "label": "Center" },
-      { "value": "right", "label": "Right" }
-    ], "default": "center" },
     { "type": "range", "id": "max_width", "label": "Max Width (px)", "min": 800, "max": 1600, "step": 50, "default": 1200 },
     { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 120, "step": 5, "default": 40 },
     { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 120, "step": 5, "default": 40 }
