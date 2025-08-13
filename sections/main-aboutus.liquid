@@ -1,484 +1,57 @@
-{%- comment -%}
-  Simple About Us Section - sections/aboutus-simple.liquid
-{%- endcomment -%}
-
-<div class="aboutus-section" id="shopify-section-{{ section.id }}">
-  <div class="aboutus-container">
-    
-    {%- comment -%} Main Title {%- endcomment -%}
-    {%- if section.settings.title != blank -%}
-      <h1 class="heading-aboutus">{{ section.settings.title }}</h1>
-    {%- endif -%}
-
-    {%- comment -%} Main Content {%- endcomment -%}
-    {%- if section.settings.content != blank -%}
-      <p class="aboutus-text">{{ section.settings.content }}</p>
-    {%- endif -%}
-
-    {%- comment -%} Additional Content Blocks {%- endcomment -%}
-    {%- if section.blocks.size > 0 -%}
-      <div class="aboutus-additional-content">
-        {%- for block in section.blocks -%}
-          <div class="aboutus-block" {{ block.shopify_attributes }}>
-            {%- case block.type -%}
-              
-              {%- when 'text_content' -%}
-                {%- if block.settings.block_title != blank -%}
-                  <h2 class="block-heading">{{ block.settings.block_title }}</h2>
-                {%- endif -%}
-                {%- if block.settings.block_text != blank -%}
-                  <p class="aboutus-text">{{ block.settings.block_text }}</p>
-                {%- endif -%}
-
-              {%- when 'simple_paragraph' -%}
-                {%- if block.settings.paragraph_text != blank -%}
-                  <p class="aboutus-text">{{ block.settings.paragraph_text }}</p>
-                {%- endif -%}
-
-            {%- endcase -%}
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-
-  </div>
+<div class="aboutus-container">
+  <h1 class="heading-aboutus">{{ section.settings.title }}</h1>
+  <p class="aboutus-text">
+   {{ section.settings.content }}
+  </p>
 </div>
 
 <style>
-  .aboutus-section {
-    width: 100%;
-    padding: {{ section.settings.section_padding }}px 20px;
-    background-color: {{ section.settings.background_color }};
-  }
-
-  .aboutus-container {
-    width: 100%;
-    max-width: {{ section.settings.container_width }}px;
-    margin: 0 auto;
-    text-align: {{ section.settings.text_alignment }};
-  }
-
-  .heading-aboutus {
-    font-size: {{ section.settings.title_size }}px;
-    font-weight: {{ section.settings.title_weight }};
-    color: {{ section.settings.title_color }};
-    border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
-    padding-bottom: {{ section.settings.border_spacing }}px;
-    margin: 0 0 {{ section.settings.title_margin }}px 0;
-    letter-spacing: {{ section.settings.title_letter_spacing }}px;
-  }
-
-  .aboutus-text {
-    font-size: {{ section.settings.text_size }}px;
-    font-weight: {{ section.settings.text_weight }};
-    color: {{ section.settings.text_color }};
-    line-height: {{ section.settings.line_height }};
-    margin: {{ section.settings.text_margin }}px auto;
-    max-width: {{ section.settings.text_max_width }}px;
-  }
-
-  .aboutus-additional-content {
-    margin-top: {{ section.settings.blocks_spacing }}px;
-  }
-
-  .aboutus-block {
-    margin-bottom: {{ section.settings.block_spacing }}px;
-  }
-
-  .block-heading {
-    font-size: {{ section.settings.block_title_size }}px;
-    font-weight: {{ section.settings.block_title_weight }};
-    color: {{ section.settings.title_color }};
-    margin: 0 0 {{ section.settings.block_title_margin }}px 0;
-    text-align: {{ section.settings.text_alignment }};
-  }
-
-  /* Mobile Responsive */
-  @media screen and (max-width: 768px) {
-    .aboutus-container {
+ 
+  .aboutus-container{
+      width: {{ section.settings.container_width }}px;
+      margin: 60px auto;
       text-align: center;
-    }
+      font-size: 36px;
+      font-weight: 500;
+  }
 
-    .heading-aboutus {
-      font-size: {{ section.settings.title_size | divided_by: 1.2 }}px;
-    }
+  .heading-aboutus{
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+  }
 
-    .aboutus-text {
-      font-size: {{ section.settings.text_size | minus: 2 }}px;
-    }
-
-    .block-heading {
-      font-size: {{ section.settings.block_title_size | divided_by: 1.2 }}px;
-    }
+  .aboutus-text{
+    margin: 60px auto;
+    font-size: 20px;
+    font-weight: 300;
   }
 </style>
 
 {% schema %}
 {
-  "name": "About Us Simple",
-  "class": "shopify-section--aboutus-simple",
-  "tag": "section",
+  "name": "About Us",
   "settings": [
-    {
-      "type": "header",
-      "content": "Main Content"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "About Us"
-    },
-    {
-      "type": "textarea",
-      "id": "content",
-      "label": "Main Content",
-      "default": "At Pillow Fights, we believe that a home is more than walls and furniture—it’s a living, breathing space that holds memories, warmth, and comfort. Every detail matters, from the way a quilt drapes over the bed on a cold night to the satisfying weight of a handcrafted wooden serving bowl passed around the dinner table. Our journey began with a simple idea: to create pieces that are not only beautiful but also meaningful. We wanted to offer products that inspire a sense of belonging, bring people together, and add a touch of quiet luxury to everyday life."
-    },
-    {
-      "type": "header",
-      "content": "Layout Settings"
-    },
     {
       "type": "range",
       "id": "container_width",
-      "label": "Container Max Width",
-      "min": 800,
+      "label": "Container Max Width (px)",
+      "min": 1000,
       "max": 1800,
       "step": 50,
-      "unit": "px",
-      "default": 1200
+      "default": 1800
     },
     {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text Alignment",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "About Us"
     },
     {
-      "type": "range",
-      "id": "section_padding",
-      "label": "Section Padding",
-      "min": 20,
-      "max": 100,
-      "step": 10,
-      "unit": "px",
-      "default": 60
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "border_color",
-      "label": "Border Color",
-      "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Title Typography"
-    },
-    {
-      "type": "range",
-      "id": "title_size",
-      "label": "Title Font Size",
-      "min": 24,
-      "max": 60,
-      "step": 2,
-      "unit": "px",
-      "default": 36
-    },
-    {
-      "type": "select",
-      "id": "title_weight",
-      "label": "Title Font Weight",
-      "options": [
-        { "value": "300", "label": "Light" },
-        { "value": "400", "label": "Normal" },
-        { "value": "500", "label": "Medium" },
-        { "value": "600", "label": "Semi Bold" },
-        { "value": "700", "label": "Bold" }
-      ],
-      "default": "500"
-    },
-    {
-      "type": "range",
-      "id": "title_letter_spacing",
-      "label": "Title Letter Spacing",
-      "min": 0,
-      "max": 3,
-      "step": 0.5,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "title_margin",
-      "label": "Title Bottom Margin",
-      "min": 20,
-      "max": 80,
-      "step": 10,
-      "unit": "px",
-      "default": 60
-    },
-    {
-      "type": "header",
-      "content": "Text Typography"
-    },
-    {
-      "type": "range",
-      "id": "text_size",
-      "label": "Text Font Size",
-      "min": 14,
-      "max": 28,
-      "step": 1,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "select",
-      "id": "text_weight",
-      "label": "Text Font Weight",
-      "options": [
-        { "value": "300", "label": "Light" },
-        { "value": "400", "label": "Normal" },
-        { "value": "500", "label": "Medium" }
-      ],
-      "default": "300"
-    },
-    {
-      "type": "range",
-      "id": "line_height",
-      "label": "Line Height",
-      "min": 1.2,
-      "max": 2.0,
-      "step": 0.1,
-      "default": 1.6
-    },
-    {
-      "type": "range",
-      "id": "text_margin",
-      "label": "Text Top/Bottom Margin",
-      "min": 20,
-      "max": 80,
-      "step": 10,
-      "unit": "px",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "text_max_width",
-      "label": "Text Max Width",
-      "min": 400,
-      "max": 1000,
-      "step": 50,
-      "unit": "px",
-      "default": 800
-    },
-    {
-      "type": "header",
-      "content": "Border Settings"
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "label": "Border Width",
-      "min": 0,
-      "max": 5,
-      "step": 1,
-      "unit": "px",
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "border_spacing",
-      "label": "Border Spacing",
-      "min": 5,
-      "max": 30,
-      "step": 5,
-      "unit": "px",
-      "default": 10
-    },
-    {
-      "type": "header",
-      "content": "Additional Blocks"
-    },
-    {
-      "type": "range",
-      "id": "blocks_spacing",
-      "label": "Blocks Top Spacing",
-      "min": 20,
-      "max": 80,
-      "step": 10,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "block_spacing",
-      "label": "Between Blocks Spacing",
-      "min": 20,
-      "max": 60,
-      "step": 10,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "block_title_size",
-      "label": "Block Title Size",
-      "min": 18,
-      "max": 32,
-      "step": 1,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "select",
-      "id": "block_title_weight",
-      "label": "Block Title Weight",
-      "options": [
-        { "value": "400", "label": "Normal" },
-        { "value": "500", "label": "Medium" },
-        { "value": "600", "label": "Semi Bold" }
-      ],
-      "default": "500"
-    },
-    {
-      "type": "range",
-      "id": "block_title_margin",
-      "label": "Block Title Bottom Margin",
-      "min": 10,
-      "max": 40,
-      "step": 5,
-      "unit": "px",
-      "default": 20
-    }
-  ],
-  "blocks": [
-    {
-      "type": "text_content",
-      "name": "Text with Title",
-      "settings": [
-        {
-          "type": "text",
-          "id": "block_title",
-          "label": "Block Title"
-        },
-        {
-          "type": "textarea",
-          "id": "block_text",
-          "label": "Text Content"
-        }
-      ]
-    },
-    {
-      "type": "simple_paragraph",
-      "name": "Simple Paragraph",
-      "settings": [
-        {
-          "type": "textarea",
-          "id": "paragraph_text",
-          "label": "Paragraph Text"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "About Us - Simple",
-      "settings": {
-        "title": "About Us",
-        "content": "We are passionate about creating exceptional products that make a difference in people's lives. Our journey started with a simple idea and has grown into something truly special.",
-        "container_width": 1200,
-        "text_alignment": "center",
-        "title_size": 36,
-        "text_size": 20,
-        "text_weight": "300"
-      }
-    },
-    {
-      "name": "About Us - Minimal",
-      "settings": {
-        "title": "Our Story",
-        "content": "Founded with a vision to create something meaningful, we've been dedicated to quality and innovation from day one.",
-        "container_width": 800,
-        "text_alignment": "center",
-        "title_size": 32,
-        "text_size": 18,
-        "border_width": 0,
-        "background_color": "#f8f8f8"
-      }
-    },
-    {
-      "name": "About Us - Classic",
-      "settings": {
-        "title": "About Our Company",
-        "content": "With years of experience and a commitment to excellence, we've built our reputation on delivering outstanding products and service to our customers worldwide.",
-        "container_width": 1000,
-        "text_alignment": "center",
-        "title_size": 40,
-        "text_size": 22,
-        "text_weight": "400",
-        "border_width": 2,
-        "border_color": "#333333"
-      }
-    },
-    {
-      "name": "About Us - Multiple Sections",
-      "settings": {
-        "title": "Welcome to Our Story",
-        "content": "This is our main introduction to who we are and what we do.",
-        "container_width": 1200,
-        "text_alignment": "center"
-      },
-      "blocks": [
-        {
-          "type": "text_content",
-          "settings": {
-            "block_title": "Our Mission",
-            "block_text": "To create products that inspire and empower our customers to achieve their goals."
-          }
-        },
-        {
-          "type": "text_content",
-          "settings": {
-            "block_title": "Our Vision",
-            "block_text": "To be recognized as a leader in innovation and customer satisfaction."
-          }
-        },
-        {
-          "type": "simple_paragraph",
-          "settings": {
-            "paragraph_text": "Thank you for choosing us as your trusted partner in this journey."
-          }
-        }
-      ]
+        "type": "text",
+        "id": "content",
+        "label": "Content"
     }
   ]
+
 }
 {% endschema %}
