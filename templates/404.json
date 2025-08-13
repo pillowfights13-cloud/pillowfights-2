@@ -1,1 +1,4 @@
-{"sections":{"main":{"type":"main-not-found","settings":{}}},"order":["main"]}
+{
+  "sections": { "main": { "type": "main-not-found", "settings": {} } },
+  "order": ["main"]
+}
