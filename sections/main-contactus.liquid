@@ -31,12 +31,10 @@
           {% render 'right-mark' %}
         </div>
 
-
         <div class="important-info-link-container">
           <p>View warranty policy</p>
           {% render 'right-mark' %}
         </div>
-
 
         <div class="important-info-link-container">
           <p>Find Us</p>
@@ -53,14 +51,24 @@
       <h3>Contact Us</h3>
       <hr>
 
-     {% form 'contact', class: 'contact-form', id: 'contact-form' %}
-        <div>
+      {% form 'contact', class: 'contact-form', id: 'contact-form' %}
+        <div class="form-group-container-outter">
           <div class="form-group-container">
-          <label for="name">Full Name</label>
-          <input type="text" name="name" id="name" placeholder="Enter your name">
+            <label for="name">Full Name</label>
+            <input type="text" name="contact[name]" id="name" placeholder="Enter your name">
+          </div>
+
+          <div class="form-group-container">
+            <label htmlFor="email">Email</label>
+            <input type="text" name="contact[email]" id="email" placeholder="your@email.com">
+          </div>
+
+          <div class="form-group-container">
+            <label htmlFor="subject">Email</label>
+            <input type="text" name="contact[subject]" id="subject" placeholder="Enter your subject">
           </div>
         </div>
-     {% endform %}
+      {% endform %}
     </div>
   </div>
 </div>
@@ -101,7 +109,7 @@
   }
 
   .important-info-link-container {
-    border: 1px solid #D9D9D9 !important;
+    border: 1px solid #d9d9d9 !important;
     padding: 10px 20px;
     border-radius: 12px;
     text-align: center;
@@ -110,40 +118,46 @@
     align-items: center;
   }
 
-  .contact-info-container{
+  .contact-info-container {
     width: 50%;
   }
 
-
-  .contact-form-container{
-    border: 1px solid #D9D9D9;
+  .contact-form-container {
+    border: 1px solid #d9d9d9;
     width: 50%;
     border-radius: 12px;
     padding: 30px;
   }
 
-  .contact-form-container h3{
+  .contact-form-container h3 {
     font-size: 1.2rem;
     font-weight: 500;
     padding: 10px;
   }
 
-  .contact-form-container hr{
-    background-color: #D9D9D9;
+  .contact-form-container hr {
+    background-color: #d9d9d9;
     width: 100%;
     height: 1px;
   }
 
-  .form-group-container{
+  .form-group-container {
     display: flex;
     flex-direction: column;
-    gap : 10px
+    gap: 10px;
   }
 
-  .form-group-container input{
-    border: 1px solid #D9D9D9;
+  .form-group-container input {
+    border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 10px;
   }
 
+  .form-group-container-outter {
+    margin-top: 30px;
+  }
+
+  .form-group-container input::placeholder {
+    color: #757575;
+  }
 </style>
