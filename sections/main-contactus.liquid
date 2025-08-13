@@ -1,6 +1,28 @@
 <div class="contact-container">
     <h1 class="">Get Support</h1>
     <p class="contact-container-sub-heading">We’re here to help you find the perfect pieces for your home. Whether you have a question about our products, need styling advice, or want to know more about our craftsmanship, our team is just a message away.</p>
+
+    <div class="main-contact-container">
+        <div class="contact-info-container">
+            <h4>Get in Touch</h4>
+            <ul>
+                <li>Email : <a href="mailto:support@pillowfights.com">support@pillowfights.com</a></li>
+                <li>Phone : <a href="tel:+91-9876543210">+91-9876543210</a></li>
+                <li>Address : <a href="https://www.google.com/maps/place/Pillow+Fights/@22.578519,88.365625,17z/data=!3m1!4b1!4m5!3m4!1s0x3a1e75a3f37f9f65:0x7fdb06b5f97aa76!8m2!3d22.578519!4d88.365625">Pillow Fights, Plot No. 12, Sector-12, Noida, Uttar Pradesh 211021, India</a></li>
+                <li> Hours: Mon–Sat, 10:00 AM – 7:00 PM (IST)</li>
+            </ul>
+        </div>
+
+
+        {% comment  %} 
+            main contact form section
+        {% endcomment %}
+
+        <div class="contact-form-container">    
+
+        </div>
+    </div>
+
 </div>
 
 
@@ -8,7 +30,7 @@
 <style>
     .contact-container {
         width: 90%;
-        margin : 0 auto;
+        margin : 60px auto;
     }
 
     .contact-container h1 {
@@ -19,9 +41,16 @@
 
     .contact-container-sub-heading{
         width: 50%;
-        margin: 0 auto;
+        margin: 48px auto;
         font-size: 1rem;
         font-weight: 300 !important;
         text-align: center;
+    }
+
+    .main-contact-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
     }
 </style>
