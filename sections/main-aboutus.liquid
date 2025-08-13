@@ -9,13 +9,12 @@
   </p>
 
   <p class="aboutus-text">
-    Every item in our collection—whether wooden kitchenware, plush pillows, or cozy quilts—is carefully designed and crafted. Our pieces marry clean, minimalist aesthetics with thoughtful function, much like Ethnicraft’s commitment to timeless, versatile design . We celebrate natural materials and work alongside skilled artisans to bring their work into homes everywhere.
+    Every item in our collection—whether wooden kitchenware, plush pillows, or cozy quilts—is carefully designed and crafted. Our pieces marry clean, minimalist aesthetics with thoughtful function, much like Ethnicraft's commitment to timeless, versatile design . We celebrate natural materials and work alongside skilled artisans to bring their work into homes everywhere.
   </p>
 
   <p class="aboutus-text">
-    Sustainability isn’t just a buzzword for us—it’s embedded in how we source and create. We honor the enduring nature of our materials—from responsibly sourced hardwoods to quality fabrics—so that our products age gracefully and remain cherished for years to come. We design with longevity in mind, creating items that carry stories through generations.
+    Sustainability isn't just a buzzword for us—it's embedded in how we source and create. We honor the enduring nature of our materials—from responsibly sourced hardwoods to quality fabrics—so that our products age gracefully and remain cherished for years to come. We design with longevity in mind, creating items that carry stories through generations.
   </p>
-
 
   <div class="aboutus-additional-content aboutus-text">
         <h3 class="about-additional-content-title">We create thoughtful homeware that transforms everyday living into timeless memories</h3>
@@ -23,16 +22,16 @@
             <img src="https://cdn.shopify.com/s/files/1/0688/9357/3180/files/about1.png?v=1755080513" alt="aboutus-image">
             <img src="https://cdn.shopify.com/s/files/1/0688/9357/3180/files/about2.png?v=1755080513" alt="aboutus-image">
             <img src="https://cdn.shopify.com/s/files/1/0688/9357/3180/files/about3.png?v=1755080514" alt="aboutus-image">
-
         </div>
   </div>
 </div>
 
 <style>
- 
   .aboutus-container{
       width: {{ section.settings.container_width }}px;
+      max-width: 100%;
       margin: 60px auto;
+      padding: 0 20px;
       text-align: center;
       font-size: 28px !important;
       font-weight: 500 !important;
@@ -51,22 +50,121 @@
 
   .about-additional-content-title{
     font-size: 28px !important;
-      font-weight: 500 !important;
+    font-weight: 500 !important;
   }
 
   .aboutus-image-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap : 60px;
+    gap: 60px;
     margin: 60px auto;
   }
 
   .aboutus-image-container img{
     width: 520px !important;
-    height: 520px important;
+    height: 520px !important;
     object-fit: contain;
+  }
 
+  /* Tablet Responsive - 1024px and below */
+  @media screen and (max-width: 1024px) {
+    .aboutus-container {
+      width: 95%;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .aboutus-image-container {
+      gap: 40px;
+    }
+
+    .aboutus-image-container img {
+      width: 400px !important;
+      height: 400px !important;
+    }
+  }
+
+  /* Mobile Landscape - 768px and below */
+  @media screen and (max-width: 768px) {
+    .aboutus-container {
+      font-size: 24px !important;
+      margin: 30px auto;
+    }
+
+    .aboutus-text {
+      margin: 40px auto;
+      font-size: 14px !important;
+    }
+
+    .about-additional-content-title {
+      font-size: 24px !important;
+    }
+
+    .aboutus-image-container {
+      flex-direction: column;
+      gap: 30px;
+      margin: 40px auto;
+    }
+
+    .aboutus-image-container img {
+      width: 300px !important;
+      height: 300px !important;
+    }
+  }
+
+  /* Mobile Portrait - 480px and below */
+  @media screen and (max-width: 480px) {
+    .aboutus-container {
+      font-size: 20px !important;
+      margin: 20px auto;
+      padding: 0 10px;
+    }
+
+    .heading-aboutus {
+      padding-bottom: 8px;
+    }
+
+    .aboutus-text {
+      margin: 30px auto;
+      font-size: 13px !important;
+    }
+
+    .about-additional-content-title {
+      font-size: 20px !important;
+      line-height: 1.3;
+    }
+
+    .aboutus-image-container {
+      gap: 20px;
+      margin: 30px auto;
+    }
+
+    .aboutus-image-container img {
+      width: 250px !important;
+      height: 250px !important;
+    }
+  }
+
+  /* Small Mobile - 360px and below */
+  @media screen and (max-width: 360px) {
+    .aboutus-container {
+      font-size: 18px !important;
+      padding: 0 5px;
+    }
+
+    .aboutus-text {
+      font-size: 12px !important;
+    }
+
+    .about-additional-content-title {
+      font-size: 18px !important;
+    }
+
+    .aboutus-image-container img {
+      width: 200px !important;
+      height: 200px !important;
+    }
   }
 </style>
 
@@ -95,6 +193,4 @@
         "label": "Content"
     }
   ]
-
 }
-{% endschema %}
