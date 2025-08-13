@@ -1,7 +1,11 @@
 <div class="aboutus-container">
   <h1 class="heading-aboutus">{{ section.settings.title }}</h1>
   <p class="aboutus-text">
-   {{ section.settings.content }}
+    {% if section.settings.content != blank %}
+        {{ section.settings.content }}
+        {% else %}
+            <p>Write your content here</p>
+    {% endif %}
   </p>
 </div>
 
