@@ -1,5 +1,5 @@
 <div class="aboutus-container">
-  <h1 class="heading-aboutus">About Us</h1>
+  <h1 class="heading-aboutus">{{ section.settings.title }}</h1>
   <p class="aboutus-text">
     At Pillow Fights, we believe that a home is more than walls and furniture—it’s a living, breathing space that holds memories, warmth, and comfort. Every detail matters, from the way a quilt drapes over the bed on a cold night to the satisfying weight of a handcrafted wooden serving bowl passed around the dinner table. Our journey began with a simple idea: to create pieces that are not only beautiful but also meaningful. We wanted to offer products that inspire a sense of belonging, bring people together, and add a touch of quiet luxury to everyday life.
   </p>
@@ -8,7 +8,7 @@
 <style>
  
   .aboutus-container{
-      width: 1000px;
+      width: {{ section.settings.container_width }}px;
       margin: 60px auto;
       text-align: center;
       font-size: 36px;
@@ -39,6 +39,12 @@
       "max": 1800,
       "step": 50,
       "default": 1800
+    },
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "About Us"
     }
   ]
 }
