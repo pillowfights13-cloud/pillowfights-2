@@ -1,3 +1,29 @@
-<div>
-    <h2>I am the about us page</h2>
+<div class="aboutus-container">
+  <h1>About Us</h1>
 </div>
+
+<style>
+ 
+  .aboutus-container{
+      width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": [
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container Max Width (px)",
+      "min": 1000,
+      "max": 1800,
+      "step": 50,
+      "default": 1800
+    }
+  ]
+}
+{% endschema %}
