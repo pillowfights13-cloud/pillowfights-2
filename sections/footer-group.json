@@ -1,1 +1,80 @@
-{"type":"footer","name":"Footer group","sections":{"text-with-icons":{"type":"text-with-icons","blocks":{"icon-1":{"type":"item","settings":{"title":"Free delivery worldwide"}},"icon-2":{"type":"item","settings":{"title":"Satisfied or refunded"}},"icon-3":{"type":"item","settings":{"title":"Top-notch support"}},"icon-4":{"type":"item","settings":{"title":"Secure payments"}}},"block_order":["icon-1","icon-2","icon-3","icon-4"],"settings":{}},"footer":{"type":"footer","blocks":{"newsletter":{"type":"newsletter","settings":{}},"links":{"type":"links","settings":{"menu":"footer","show_menu_title":true}},"text":{"type":"text","settings":{"title":"About","content":"<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.<\/p>"}}},"block_order":["newsletter","links","text"],"settings":{}}},"order":["text-with-icons","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "image_hcPL7a": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Pillow_Fights_cr.png",
+            "image_width": 100,
+            "link": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": "Collection"
+          }
+        },
+        "links_Pgx3ch": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": "Customer Care"
+          }
+        },
+        "links_Xd6rUG": {
+          "type": "links",
+          "settings": {
+            "menu": "policies",
+            "show_menu_title": true,
+            "menu_title": "Company"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "title": "Contact Us",
+            "content": "<p>Address :- L-60 Kalkaji South Delhi New Delhi 110019</p><p></p><p>Email :- contact@pillowfights.co.in</p><p>Contact :- +91 98114 13401</p>",
+            "enable_follow_on_shop": true
+          }
+        }
+      },
+      "block_order": [
+        "image_hcPL7a",
+        "links",
+        "links_Pgx3ch",
+        "links_Xd6rUG",
+        "text"
+      ],
+      "settings": {
+        "color_scheme": "scheme-ac07a60c-aa0c-42de-86a5-319cfe6f874c",
+        "separate_section_with_border": true,
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
