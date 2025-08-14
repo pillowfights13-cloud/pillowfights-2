@@ -188,7 +188,7 @@
     color: #757575;
   }
 
-  .submit input[type=submit]{
+  .submit input[type="submit"] {
     margin-top: 20px;
     width: 100%;
     background-color: #C49B66;
@@ -196,5 +196,23 @@
     border-radius: 12px;
     text-align: center;
     padding: 10px;
+    color: #fff; /* Add text color */
+    font-size: 16px; /* Add font size */
+    cursor: pointer; /* Add pointer cursor */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+
+  .submit input[type="submit"]:hover {
+    background-color: #B8976A; /* Darker shade on hover */
+    transform: translateY(-1px); /* Subtle lift effect */
+  }
+
+  .submit input[type="submit"]:active {
+    transform: translateY(0); /* Return to normal on click */
+  }
+
+  .submit input[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.3); /* Focus ring */
   }
 </style>
