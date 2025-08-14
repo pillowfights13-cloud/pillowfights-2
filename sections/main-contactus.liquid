@@ -51,39 +51,76 @@
       <h3>Contact Us</h3>
       <hr>
 
+      {%- comment -%} Success Message {%- endcomment -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form-message form-message--success" id="success-message">
+          <div class="form-message-icon">✓</div>
+          <div class="form-message-content">
+            <h4>Thank you!</h4>
+            <p>Your message has been sent successfully. We'll get back to you soon!</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Error Messages {%- endcomment -%}
+      {%- if form.errors -%}
+        <div class="form-message form-message--error" id="error-message">
+          <div class="form-message-icon">!</div>
+          <div class="form-message-content">
+            <h4>Please fix the following errors:</h4>
+            <ul>
+              {%- for error in form.errors -%}
+                <li>{{ error }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Live Error Container (for JavaScript validation) {%- endcomment -%}
+      <div class="form-message form-message--error" id="live-error-message" style="display: none;">
+        <div class="form-message-icon">!</div>
+        <div class="form-message-content">
+          <h4>Please fix the following errors:</h4>
+          <ul id="live-error-list"></ul>
+        </div>
+      </div>
+
       {% form 'contact', class: 'contact-form', id: 'contact-form' %}
-        {{ form.errors | default_errors }}
         <div class="form-group-container-outter">
           <div class="form-group-container">
             <label for="name">Full Name</label>
-            <input required type="text" name="contact[name]" id="name" placeholder="Enter your name">
+            <input required type="text" name="contact[name]" id="name" placeholder="Enter your name" value="{{ form.name }}">
+            <div class="field-error" id="name-error"></div>
           </div>
 
           <div class="form-group-container">
-            <label htmlFor="email">Email</label>
-            <input required type="text" name="contact[email]" id="email" placeholder="your@email.com">
+            <label for="email">Email</label>
+            <input required type="email" name="contact[email]" id="email" placeholder="your@email.com" value="{{ form.email }}">
+            <div class="field-error" id="email-error"></div>
           </div>
 
           <div class="form-group-container">
-            <label htmlFor="subject">Subject</label>
-            <input type="text" name="contact[subject]" id="subject" placeholder="Enter your subject">
+            <label for="subject">Subject</label>
+            <input type="text" name="contact[subject]" id="subject" placeholder="Enter your subject" value="{{ form.subject }}">
+            <div class="field-error" id="subject-error"></div>
           </div>
 
           <div class="form-group-container">
-            <label htmlFor="textarea">Message</label>
+            <label for="textarea">Message</label>
             <textarea
               required
               cols="30"
               rows="10"
-              type="text"
               name="contact[body]"
               id="textarea"
-              placeholder="Enter your subject"
-            ></textarea>
+              placeholder="Enter your message"
+            >{{ form.body }}</textarea>
+            <div class="field-error" id="textarea-error"></div>
           </div>
 
-          <div className="submit">
-            <input type="submit" value="Send">
+          <div class="submit">
+            <input type="submit" value="Send" id="submit-button">
           </div>
           <p class="recaptcha-disclaimer">This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
         </div>
@@ -161,23 +198,124 @@
     height: 1px;
   }
 
+  /* Form Messages */
+  .form-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid;
+  }
+
+  .form-message--success {
+    background-color: #f0f9ff;
+    border-color: #22c55e;
+    color: #166534;
+  }
+
+  .form-message--error {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+    color: #dc2626;
+  }
+
+  .form-message-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .form-message--success .form-message-icon {
+    background-color: #22c55e;
+    color: white;
+  }
+
+  .form-message--error .form-message-icon {
+    background-color: #ef4444;
+    color: white;
+  }
+
+  .form-message-content h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .form-message-content p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .form-message-content ul {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 14px;
+  }
+
+  .form-message-content ul li {
+    margin-bottom: 4px;
+  }
+
   .form-group-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 30px;
+    position: relative;
   }
 
   .form-group-container input {
     border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group-container input.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  .form-group-container input.success {
+    border-color: #22c55e;
+    background-color: #f0f9ff;
   }
 
   .form-group-container textarea {
     border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group-container textarea.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  .form-group-container textarea.success {
+    border-color: #22c55e;
+    background-color: #f0f9ff;
+  }
+
+  .field-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .field-error.show {
+    display: block;
   }
 
   .form-group-container-outter {
@@ -204,24 +342,30 @@
     border-radius: 12px;
     text-align: center;
     padding: 10px;
-    color: #fff; /* Add text color */
-    font-size: 16px; /* Add font size */
-    cursor: pointer; /* Add pointer cursor */
-    transition: all 0.3s ease; /* Smooth transition */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   input[type="submit"]:hover {
-    background-color: #B8976A; /* Darker shade on hover */
-    transform: translateY(-1px); /* Subtle lift effect */
+    background-color: #B8976A;
+    transform: translateY(-1px);
   }
 
-   input[type="submit"]:active {
-    transform: translateY(0); /* Return to normal on click */
+  input[type="submit"]:active {
+    transform: translateY(0);
   }
 
   input[type="submit"]:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.3); /* Focus ring */
+    box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.3);
+  }
+
+  input[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
   }
 
   .recaptcha-disclaimer{
@@ -279,12 +423,12 @@
 
     .contact-info-container {
       width: 100%;
-      order: 2; /* Move contact info below form on mobile */
+      order: 2;
     }
 
     .contact-form-container {
       width: 100%;
-      order: 1; /* Move form to top on mobile */
+      order: 1;
       padding: 20px;
     }
 
@@ -342,11 +486,11 @@
     .form-group-container input,
     .form-group-container textarea {
       padding: 12px;
-      font-size: 16px; /* Prevent zoom on iOS */
+      font-size: 16px;
     }
 
     .contact-important-info-link {
-      grid-template-columns: 1fr; /* Single column on small screens */
+      grid-template-columns: 1fr;
       margin-top: 30px;
       gap: 12px;
     }
@@ -423,3 +567,168 @@
     }
   }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const submitButton = document.getElementById('submit-button');
+  const liveErrorMessage = document.getElementById('live-error-message');
+  const liveErrorList = document.getElementById('live-error-list');
+  
+  // Form fields
+  const nameField = document.getElementById('name');
+  const emailField = document.getElementById('email');
+  const subjectField = document.getElementById('subject');
+  const messageField = document.getElementById('textarea');
+  
+  // Error containers
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const subjectError = document.getElementById('subject-error');
+  const messageError = document.getElementById('textarea-error');
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Validation functions
+  function validateName() {
+    const value = nameField.value.trim();
+    if (value.length < 2) {
+      showFieldError(nameField, nameError, 'Name must be at least 2 characters long');
+      return false;
+    }
+    hideFieldError(nameField, nameError);
+    return true;
+  }
+
+  function validateEmail() {
+    const value = emailField.value.trim();
+    if (!value) {
+      showFieldError(emailField, emailError, 'Email is required');
+      return false;
+    }
+    if (!emailRegex.test(value)) {
+      showFieldError(emailField, emailError, 'Please enter a valid email address');
+      return false;
+    }
+    hideFieldError(emailField, emailError);
+    return true;
+  }
+
+  function validateMessage() {
+    const value = messageField.value.trim();
+    if (value.length < 10) {
+      showFieldError(messageField, messageError, 'Message must be at least 10 characters long');
+      return false;
+    }
+    hideFieldError(messageField, messageError);
+    return true;
+  }
+
+  function showFieldError(field, errorElement, message) {
+    field.classList.add('error');
+    field.classList.remove('success');
+    errorElement.textContent = message;
+    errorElement.classList.add('show');
+  }
+
+  function hideFieldError(field, errorElement) {
+    field.classList.remove('error');
+    field.classList.add('success');
+    errorElement.classList.remove('show');
+    errorElement.textContent = '';
+  }
+
+  function showLiveError(errors) {
+    liveErrorList.innerHTML = '';
+    errors.forEach(error => {
+      const li = document.createElement('li');
+      li.textContent = error;
+      liveErrorList.appendChild(li);
+    });
+    liveErrorMessage.style.display = 'flex';
+    liveErrorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function hideLiveError() {
+    liveErrorMessage.style.display = 'none';
+  }
+
+  // Real-time validation
+  nameField.addEventListener('blur', validateName);
+  nameField.addEventListener('input', function() {
+    if (this.value.trim().length >= 2) {
+      hideFieldError(this, nameError);
+    }
+  });
+
+  emailField.addEventListener('blur', validateEmail);
+  emailField.addEventListener('input', function() {
+    if (emailRegex.test(this.value.trim())) {
+      hideFieldError(this, emailError);
+    }
+  });
+
+  messageField.addEventListener('blur', validateMessage);
+  messageField.addEventListener('input', function() {
+    if (this.value.trim().length >= 10) {
+      hideFieldError(this, messageError);
+    }
+  });
+
+  // Form submission validation
+  form.addEventListener('submit', function(e) {
+    hideLiveError();
+    
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isMessageValid = validateMessage();
+    
+    const errors = [];
+    
+    if (!isNameValid) {
+      errors.push('Please enter a valid name (at least 2 characters)');
+    }
+    
+    if (!isEmailValid) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (!isMessageValid) {
+      errors.push('Please enter a message (at least 10 characters)');
+    }
+    
+    if (errors.length > 0) {
+      e.preventDefault();
+      showLiveError(errors);
+      return false;
+    }
+
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.value = 'Sending...';
+  });
+
+  // Auto-hide success message after 5 seconds
+  const successMessage = document.getElementById('success-message');
+  if (successMessage) {
+    setTimeout(function() {
+      successMessage.style.opacity = '0';
+      setTimeout(function() {
+        successMessage.style.display = 'none';
+      }, 300);
+    }, 5000);
+  }
+
+  // Auto-hide server error message after 10 seconds
+  const errorMessage = document.getElementById('error-message');
+  if (errorMessage) {
+    setTimeout(function() {
+      errorMessage.style.opacity = '0';
+      setTimeout(function() {
+        errorMessage.style.display = 'none';
+      }, 300);
+    }, 10000);
+  }
+});
+</script>
