@@ -1,7 +1,7 @@
 <div class="contact-container">
   <h1 class="">Get Support</h1>
   <p class="contact-container-sub-heading">
-    We’re here to help you find the perfect pieces for your home. Whether you have a question about our products, need
+    We're here to help you find the perfect pieces for your home. Whether you have a question about our products, need
     styling advice, or want to know more about our craftsmanship, our team is just a message away.
   </p>
 
@@ -85,7 +85,7 @@
           <div className="submit">
             <input type="submit" value="Send">
           </div>
-          <p class="recaptcha-disclaimer">This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
+          <p class="recaptcha-disclaimer">This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
         </div>
       {% endform %}
     </div>
@@ -226,5 +226,200 @@
 
   .recaptcha-disclaimer{
     margin-top: 12px;
+  }
+
+  /* Tablet Responsive - 1024px and below */
+  @media screen and (max-width: 1024px) {
+    .contact-container {
+      width: 95%;
+      margin: 40px auto;
+    }
+
+    .contact-container-sub-heading {
+      width: 70%;
+      margin: 36px auto;
+    }
+
+    .main-contact-container {
+      width: 90%;
+      gap: 40px;
+    }
+
+    .contact-important-info-link {
+      margin-top: 60px;
+    }
+
+    .contact-form-container {
+      padding: 25px;
+    }
+  }
+
+  /* Mobile Landscape - 768px and below */
+  @media screen and (max-width: 768px) {
+    .contact-container {
+      width: 95%;
+      margin: 30px auto;
+    }
+
+    .contact-container h1 {
+      font-size: 1.6rem;
+    }
+
+    .contact-container-sub-heading {
+      width: 85%;
+      margin: 30px auto;
+      font-size: 0.95rem;
+    }
+
+    .main-contact-container {
+      flex-direction: column;
+      width: 100%;
+      gap: 40px;
+    }
+
+    .contact-info-container {
+      width: 100%;
+      order: 2; /* Move contact info below form on mobile */
+    }
+
+    .contact-form-container {
+      width: 100%;
+      order: 1; /* Move form to top on mobile */
+      padding: 20px;
+    }
+
+    .contact-important-info-link {
+      margin-top: 40px;
+      gap: 15px;
+    }
+
+    .important-info-link-container {
+      padding: 8px 15px;
+    }
+
+    .important-info-link-container p {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Mobile Portrait - 480px and below */
+  @media screen and (max-width: 480px) {
+    .contact-container {
+      width: 95%;
+      margin: 20px auto;
+      padding: 0 10px;
+    }
+
+    .contact-container h1 {
+      font-size: 1.4rem;
+    }
+
+    .contact-container-sub-heading {
+      width: 95%;
+      margin: 25px auto;
+      font-size: 0.9rem;
+    }
+
+    .main-contact-container {
+      width: 100%;
+      gap: 30px;
+    }
+
+    .contact-form-container {
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .contact-form-container h3 {
+      font-size: 1.1rem;
+      padding: 5px;
+    }
+
+    .form-group-container {
+      margin-top: 20px;
+    }
+
+    .form-group-container input,
+    .form-group-container textarea {
+      padding: 12px;
+      font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .contact-important-info-link {
+      grid-template-columns: 1fr; /* Single column on small screens */
+      margin-top: 30px;
+      gap: 12px;
+    }
+
+    .important-info-link-container {
+      padding: 12px 15px;
+    }
+
+    .important-info-link-container p {
+      font-size: 0.85rem;
+    }
+
+    input[type="submit"] {
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    .recaptcha-disclaimer {
+      font-size: 0.8rem;
+      margin-top: 15px;
+    }
+  }
+
+  /* Small Mobile - 360px and below */
+  @media screen and (max-width: 360px) {
+    .contact-container {
+      width: 98%;
+      padding: 0 5px;
+    }
+
+    .contact-container h1 {
+      font-size: 1.3rem;
+    }
+
+    .contact-container-sub-heading {
+      width: 98%;
+      font-size: 0.85rem;
+    }
+
+    .contact-form-container {
+      padding: 12px;
+    }
+
+    .form-group-container input,
+    .form-group-container textarea {
+      padding: 10px;
+    }
+
+    .important-info-link-container {
+      padding: 10px 12px;
+    }
+
+    .important-info-link-container p {
+      font-size: 0.8rem;
+    }
+
+    .recaptcha-disclaimer {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Very Wide Screens - 1400px and above */
+  @media screen and (min-width: 1400px) {
+    .contact-container {
+      width: 85%;
+    }
+
+    .main-contact-container {
+      width: 70%;
+    }
+
+    .contact-container-sub-heading {
+      width: 40%;
+    }
   }
 </style>
