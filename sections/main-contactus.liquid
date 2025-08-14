@@ -85,7 +85,7 @@
           <div className="submit">
             <input type="submit" value="Send">
           </div>
-          <p>This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
+          <p class="recaptcha-disclaimer">This site is protected by reCAPTCHA Enterprise and the Google Privacy Policy and Terms of Service apply.</p>
         </div>
       {% endform %}
     </div>
@@ -188,6 +188,14 @@
     color: #757575;
   }
 
+  input:focus{
+    outline: none;
+  }
+
+  textarea:focus{
+    outline: none;
+  }
+
   input[type="submit"] {
     margin-top: 20px;
     width: 100%;
@@ -214,5 +222,9 @@
   input[type="submit"]:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.3); /* Focus ring */
+  }
+
+  .recaptcha-disclaimer{
+    margin-top: 12px;
   }
 </style>
