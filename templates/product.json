@@ -83,6 +83,10 @@
           "settings": {
             "maxwidth": 1080
           }
+        },
+        "judge_me_reviews_preview_badge_dWKnME": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         }
       },
       "block_order": [
@@ -96,7 +100,8 @@
         "description",
         "variant_picker",
         "complementary_products",
-        "judge_me_reviews_featured_carousel_7jMGbE"
+        "judge_me_reviews_featured_carousel_7jMGbE",
+        "judge_me_reviews_preview_badge_dWKnME"
       ],
       "settings": {
         "color_scheme": "scheme-ac07a60c-aa0c-42de-86a5-319cfe6f874c",
