@@ -69,6 +69,22 @@
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
+
+
+    {% comment %}
+      Google Tag Manager Code
+    {% endcomment %}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENDXQZ7M2V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ENDXQZ7M2V');
+    </script>
+
   </head>
 
   {% liquid
