@@ -11,6 +11,27 @@
   "type": "header",
   "name": "Header group",
   "sections": {
+    "17564072729c6f162f": {
+      "type": "apps",
+      "blocks": {
+        "kwikpass_kp_login_tbfha7": {
+          "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "kwikpass_kp_login_tbfha7"
+      ],
+      "custom_css": [
+        "selector{}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
@@ -59,29 +80,11 @@
         "show_locale_selector": false,
         "transparent_header_text_color": "#ffffff"
       }
-    },
-    "17564072729c6f162f": {
-      "type": "apps",
-      "blocks": {
-        "kwikpass_kp_login_tbfha7": {
-          "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "kwikpass_kp_login_tbfha7"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false
-      }
     }
   },
   "order": [
+    "17564072729c6f162f",
     "announcement-bar",
-    "header",
-    "17564072729c6f162f"
+    "header"
   ]
 }
