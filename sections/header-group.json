@@ -22,14 +22,12 @@
       "block_order": [
         "kwikpass_kp_login_tbfha7"
       ],
-      "custom_css": [
-        "selector{}"
-      ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": true
       }
     },
     "announcement-bar": {
