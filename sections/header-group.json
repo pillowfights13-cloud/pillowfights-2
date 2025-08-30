@@ -43,6 +43,7 @@
       "block_order": [
         "message-1"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-3938b5f8-a8a0-427f-a7a0-062c578e2f2b",
         "enable_sticky": false,
