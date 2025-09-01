@@ -1,1 +1,42 @@
-{"sections":{"main":{"type":"main-cart","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "blocks": {
+        "kwik_cod_checkout_checkout_button_jDwAkG": {
+          "type": "shopify://apps/kwik-cod-checkout/blocks/checkout_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
+          "settings": {
+            "gkc_button_text": "Checkout Now",
+            "gkc_button_subtext": "",
+            "gkc_button_bg": "#c49b66",
+            "gkc_text_color": "#ffffff",
+            "gk_image": true
+          }
+        }
+      },
+      "block_order": [
+        "kwik_cod_checkout_checkout_button_jDwAkG"
+      ],
+      "settings": {
+        "color_scheme": "scheme-ac07a60c-aa0c-42de-86a5-319cfe6f874c",
+        "show_cart_note": true,
+        "show_order_weight": false,
+        "show_shipping_text": true,
+        "show_accelerated_buttons": false,
+        "show_shipping_estimator": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
