@@ -147,7 +147,7 @@
                 </noscript>
 
                 {%- assign checkout_button = 'cart.general.checkout' | t -%}
-                {%- render 'button', type: 'submit', content: checkout_button, name: 'checkout' -%}
+                {% comment %} {%- render 'button', type: 'submit', content: checkout_button, name: 'checkout' -%} {% endcomment %}
               </div>
             </div>
           </div>
