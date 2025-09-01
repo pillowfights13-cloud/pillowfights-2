@@ -43,8 +43,8 @@
             "payment_button_text_color": ""
           }
         },
-        "kwik_cod_checkout_buy_now_button_UYc7Gt": {
-          "type": "shopify://apps/kwik-cod-checkout/blocks/buy_now_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
+        "kwik_cod_checkout_checkout_button_hWcgLr": {
+          "type": "shopify://apps/kwik-cod-checkout/blocks/checkout_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
           "settings": {
             "gkc_button_text": "Buy Now",
             "gkc_button_subtext": "",
@@ -105,7 +105,7 @@
         "price",
         "quantity_selector",
         "buy_buttons_KXqxbU",
-        "kwik_cod_checkout_buy_now_button_UYc7Gt",
+        "kwik_cod_checkout_checkout_button_hWcgLr",
         "payment_terms",
         "separator",
         "description",
