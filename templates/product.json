@@ -28,8 +28,22 @@
             "show_taxes_notice": false
           }
         },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
+          "settings": {}
+        },
+        "share_buttons_xqmX9W": {
+          "type": "share_buttons",
           "settings": {}
         },
         "buy_buttons_KXqxbU": {
@@ -43,8 +57,8 @@
             "payment_button_text_color": ""
           }
         },
-        "kwik_cod_checkout_checkout_button_hWcgLr": {
-          "type": "shopify://apps/kwik-cod-checkout/blocks/checkout_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
+        "kwik_cod_checkout_buy_now_button_UYc7Gt": {
+          "type": "shopify://apps/kwik-cod-checkout/blocks/buy_now_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
           "settings": {
             "gkc_button_text": "Buy Now",
             "gkc_button_subtext": "",
@@ -66,16 +80,6 @@
           "settings": {
             "collapse_content": false,
             "show_below_gallery": false
-          }
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "hide_sold_out_variants": false,
-            "selector_style": "block",
-            "swatch_selector_style": "swatch",
-            "variant_image_options": "",
-            "size_chart_page": ""
           }
         },
         "complementary_products": {
@@ -103,13 +107,14 @@
         "vendor",
         "title",
         "price",
+        "variant_picker",
         "quantity_selector",
+        "share_buttons_xqmX9W",
         "buy_buttons_KXqxbU",
-        "kwik_cod_checkout_checkout_button_hWcgLr",
+        "kwik_cod_checkout_buy_now_button_UYc7Gt",
         "payment_terms",
         "separator",
         "description",
-        "variant_picker",
         "complementary_products",
         "judge_me_reviews_featured_carousel_7jMGbE",
         "judge_me_reviews_preview_badge_dWKnME"
